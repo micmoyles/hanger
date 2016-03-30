@@ -1,0 +1,18 @@
+body { 
+font-size: 14pt;
+}
+#.menu_btn { 
+font-size: 14pt;
+font-family: helvitica; 
+}
+table { 
+font-size: 12pt; 
+font-family: helvitica; 
+}
+
+tr.oddrowcolour { 
+background-color: #d4e3e5; 
+}
+tr.evenrowcolour { 
+background-color: #c3dde0;
+}
