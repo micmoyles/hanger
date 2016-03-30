@@ -17,12 +17,6 @@ def h_start():
 	print '\n'
 	print '<html>'
 	print '<head>'
-#	print "<style type='text/css'>"
-#	print "body { font-size: 14pt;}"
-#	print "table { font-size: 10pt; font-family: helvitica}"
-#	print "tr.oddrowcolour{ background-color:#d4e3e5; }"
-#	print "tr.evenrowcolour{ background-color:#c3dde0; }"
-#	print '</style>'
         print "<link rel='stylesheet' href='/hanger.css' type='text/css'/ >"
 	print '</head>'
 	print '<body>'
