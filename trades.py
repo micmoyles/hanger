@@ -17,8 +17,8 @@ host = 'localhost'
 user = 'root'
 passwd = 'wiarreft'
 session = '20150602A'
-
-hanger.h_start()
+#hanger.h_start()
+hanger.bootstrap_start()
 hanger.menu()
 hanger.h1('Trades')
 print ' <form method = "get">'
@@ -72,4 +72,5 @@ cursor.close()
 
 
 hanger.table(rows,cols)
-hanger.h_close()
+#hanger.h_close()
+hanger.bootstrap_close()

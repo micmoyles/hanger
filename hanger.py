@@ -20,6 +20,35 @@ def h_start():
         print "<link rel='stylesheet' href='/hanger.css' type='text/css'/ >"
 	print '</head>'
 	print '<body>'
+def bootstrap_start():
+	print 'Content-Type: text-html'
+	print '<html lang="en">'
+	print '  <head>'
+	print '    <meta charset="utf-8">'
+	print '    <meta http-equiv="X-UA-Compatible" content="IE=edge">'
+	print '    <meta name="viewport" content="width=device-width, initial-scale=1">'
+	print '    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->'
+	print '    <title>Bootstrap 101 Template</title>'
+	print ''
+	print '    <!-- Bootstrap -->'
+	print '    <link href="css/bootstrap.min.css" rel="stylesheet">'
+	print ''
+	print '    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->'
+	print '    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->'
+	print '    <!--[if lt IE 9]>'
+	print '      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>'
+	print '      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>'
+	print '    <![endif]-->'
+	print '  </head>'
+	print '  <body>'
+
+def bootstrap_close():
+	print'    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
+	print'    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
+	print'    <!-- Include all compiled plugins (below), or include individual files as needed -->'
+	print'    <script src="js/bootstrap.min.js"></script>'
+	print'  </body>'
+	print'</html>'
 
 def h_close():
 	print '</body>'
