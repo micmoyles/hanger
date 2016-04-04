@@ -4,13 +4,15 @@
 
 def menu():
 	menu = ''
-	menu += str('<div id=".menu-btn">  Menu </div>| ')
+	menu += str('<div>  Menu </div>| ')
 	menu += str('<a href=trades.py> Trades </a>| ')
 	menu += str('<a href=position.py> Position </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
 	menu += str('<a href=messages.py> Messages </a>| ')
 	menu += str('<a href=stats.py> Hanger Stats </a>| ')
+	print '<div class="container" >'
 	print menu
+	print '</div>'
 
 def h_start():
 	print 'Content-Type: text/html'
