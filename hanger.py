@@ -20,9 +20,10 @@ def h_start():
         print "<link rel='stylesheet' href='/hanger.css' type='text/css'/ >"
 	print '</head>'
 	print '<body>'
+
 def bootstrap_start():
 	print 'Content-Type: text-html'
-	print '\n'
+	print '\n' # new line needed to identify html header
 	print '<html>'
 	print '  <head>'
 	print '    <meta charset="utf-8">'
