@@ -22,7 +22,8 @@ def h_start():
 	print '<body>'
 def bootstrap_start():
 	print 'Content-Type: text-html'
-	print '<html lang="en">'
+	print '\n'
+	print '<html>'
 	print '  <head>'
 	print '    <meta charset="utf-8">'
 	print '    <meta http-equiv="X-UA-Compatible" content="IE=edge">'
@@ -32,6 +33,7 @@ def bootstrap_start():
 	print ''
 	print '    <!-- Bootstrap -->'
 	print '    <link href="css/bootstrap.min.css" rel="stylesheet">'
+        print '    <link rel="stylesheet" href="/hanger.css" type="text/css"/ >'
 	print ''
 	print '    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->'
 	print '    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->'
