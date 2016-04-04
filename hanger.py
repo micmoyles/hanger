@@ -33,7 +33,7 @@ def bootstrap_start():
 	print '    <title>Bootstrap 101 Template</title>'
 	print ''
 	print '    <!-- Bootstrap -->'
-	print '    <link href="css/bootstrap.min.css" rel="stylesheet">'
+	print '    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">'
         print '    <link rel="stylesheet" href="/hanger.css" type="text/css"/ >'
 	print ''
 	print '    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->'
@@ -49,7 +49,7 @@ def bootstrap_close():
 	print'    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
 	print'    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
 	print'    <!-- Include all compiled plugins (below), or include individual files as needed -->'
-	print'    <script src="js/bootstrap.min.js"></script>'
+	print'    <script src="/bootstrap/js/bootstrap.min.js"></script>'
 	print'  </body>'
 	print'</html>'
 
