@@ -23,7 +23,7 @@ def h_start():
 	print '</head>'
 	print '<body>'
 
-def bootstrap_start():
+def bootstrap_start(title):
 	print 'Content-Type: text-html'
 	print '\n' # new line needed to identify html header
 	print '<html>'
@@ -32,7 +32,7 @@ def bootstrap_start():
 	print '    <meta http-equiv="X-UA-Compatible" content="IE=edge">'
 	print '    <meta name="viewport" content="width=device-width, initial-scale=1">'
 	print '    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->'
-	print '    <title>Bootstrap 101 Template</title>'
+	print '    <title> %s </title>' % str(title)
 	print ''
 	print '    <!-- Bootstrap -->'
 	print '    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">'
@@ -45,7 +45,7 @@ def bootstrap_start():
 	print '      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>'
 	print '    <![endif]-->'
 	print '  </head>'
-	print '  <body>'
+	print '  <body class="container">'
 
 def bootstrap_close():
 	print'    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
@@ -58,6 +58,20 @@ def bootstrap_close():
 def h_close():
 	print '</body>'
 	print '</html>'
+def make_form():
+	print '''
+<form class="form-inline">
+  <div class="form-group">
+    <label for="exampleInputName2">Name</label>
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Email</label>
+    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+  </div>
+  <button type="submit" class="btn btn-default">Send invitation</button>
+</form>
+'''
 
 def p(text):
 	# print html paragraph

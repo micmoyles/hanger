@@ -18,7 +18,7 @@ passwd = 'wiarreft'
 session = '20150602A'
 
 
-h.h_start()
+h.bootstrap_start('Positions')
 h.menu()
 #sessions = os.system('mysql -uroot -pwiarreft -e "show databases;" | grep 201')
 sessions = ['20150602A','20150603A']
@@ -78,4 +78,4 @@ h.h2('Sell Table')
 h.table(rows,cols)
 
     
-h.h_close()
+h.bootstrap_close()
