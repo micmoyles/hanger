@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Live Book </title>
+
+    <!-- Bootstrap -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/hanger.css" type="text/css"/ >
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div class="container" style='font-size:14px' >
+| <a href=trades.py > Trades </a>| <a href=position.py> Position </a>| <a href=loader.py> Loader </a>| <a href=messages.py> Messages </a>| <a href=stats.py> Hanger Stats </a>| 
+<br>
+</div>
+<div class='row container'>
+<div class='col-md-8'>
+<h2 class='container'>BookViewer</h2>
+</div>
+<div class='col-md-2'>
+<form method='GET'>
+<select class="form-control">
+  <option>ESM5</option>
+  <option>ESM5-ESU5</option>
+  <option>ESM5-ESZ5</option>
+  <option>ESU5</option>
+  <option>ESZ5</option>
+</select>
+</div>
+<div class='col-md-2'>
+<button type="submit" class="btn btn-default">Submit</button>
+</div>
+</form>
+</div>
+</div>
+<div class='container row'>
+<div class='col-md-8'>
+<table class='table table-bordered table-striped'>
+<tbody>
+<tr>
+<td class='buy_header' align='right'><b>Buy</b></td><td class='sell_header'><b>Sell</b></td>
+</tr>
+<tr>
+<td class='level buy buylevel1' align='right'>149</td><td class='selllevel1 sell level'>150</td>
+</tr>
+<tr>
+<td class='level buy buylevel2' align='right'>148</td><td class='selllevel2 sell level'>151</td>
+</tr>
+<tr>
+<td class='level buy buylevel3' align='right'>147</td><td class='selllevel3 sell level'>152</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class='col-md-4'>
+<table class='table table-striped trades'>
+<tbody>
+<tr>
+<th>Trades</th>
+</tr>
+<tr>
+<td>102</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class='container row'>
+<form class="form-inline container col-md-8" method = "get" >
+<div class="form-group">
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+        <td>
+        <label for="exampleInputName2">Symbol</label>
+        <input type="text" class="form-control form-symbol" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Trade Side</label>
+        <input type="text" class="form-control form-side" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Price</label>
+        <input type="text" class="form-control form-price" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Size</label>
+        <input type="text" class="form-control" id="exampleInputName2">
+        </td>
+        <tr>
+        <td>
+        <label for="exampleInputName2">Venue</label>
+        <input type="text" class="form-control" id="exampleInputName2">
+        </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="btn btn-info">
+<a class="btn btn-price">Trade</a>
+</div>
+</form>
+</div>
+    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script src="book.js"></script>
+    <script src="sortable.js"></script>
+  </body>
+</html>
+
