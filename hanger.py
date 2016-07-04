@@ -7,12 +7,33 @@ def menu():
 	menu += str('<div>  Menu </div>| ')
 	menu += str('<a href=trades.py> Trades </a>| ')
 	menu += str('<a href=position.py> Position </a>| ')
+	menu += str('<a href=canvas.py> Live Charts </a>| ')
+	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
 	menu += str('<a href=messages.py> Messages </a>| ')
 	menu += str('<a href=stats.py> Hanger Stats </a>| ')
 	print '<div class="container" >'
 	print menu
 	print '</div>'
+
+def bootstrap_menu():
+	menu = ''
+	menu += str('<a href=trades.py> Trades </a>| ')
+	menu += str('<a href=position.py> Position </a>| ')
+	menu += str('<a href=canvas.py> Live Charts </a>| ')
+	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
+	menu += str('<a href=loader.py> Loader </a>| ')
+	menu += str('<a href=messages.py> Messages </a>| ')
+	menu += str('<a href=stats.py> Hanger Stats </a>| ')
+	print "<div class='row container' style='font-size:18px' >"
+	print "<div class='col-md-2'>"
+	print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:120px;width:120px'>"
+	print "</div>"
+	print "<div class='col-md-10'>"
+	print menu
+	#print "| <a href=bootstrap_book.html > BookViewer </a> | <a href=trades.py > Trades </a>| <a href=position.py> Position </a>| <a href=loader.py> Loader </a>| <a href=messages.py> Messages </a>| <a href=stats.py> Hanger Stats </a>|"
+	print "</div>"
+	print "</div>"
 
 def h_start():
 	print 'Content-Type: text/html'
@@ -35,8 +56,9 @@ def bootstrap_start(title):
 	print '    <title> %s </title>' % str(title)
 	print ''
 	print '    <!-- Bootstrap -->'
-	print '    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">'
-        print '    <link rel="stylesheet" href="/hanger.css" type="text/css"/ >'
+	print '    <link href="css/bootstrap.min.css" rel="stylesheet">'
+	print '    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>'
+        print '    <link rel="stylesheet" href="hanger.css" type="text/css"/ >'
 	print ''
 	print '    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->'
 	print '    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->'
@@ -46,14 +68,16 @@ def bootstrap_start(title):
 	print '    <![endif]-->'
 	print '  </head>'
 	print '  <body class="container">'
+	bootstrap_menu()
 
 def bootstrap_close():
-	print'    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
-	print'    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
-	print'    <!-- Include all compiled plugins (below), or include individual files as needed -->'
-	print'    <script src="/bootstrap/js/bootstrap.min.js"></script>'
-	print'  </body>'
-	print'</html>'
+	print '    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
+	print '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
+	print '    <!-- Include all compiled plugins (below), or include individual files as needed -->'
+	print '    <script src="/bootstrap/js/bootstrap.min.js"></script>'
+	print '	  <script src="charts.js"></script>'
+	print '  </body>'
+	print ' </html>'
 
 def h_close():
 	print '</body>'

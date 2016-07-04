@@ -17,9 +17,7 @@ host = 'localhost'
 user = 'root'
 passwd = 'wiarreft'
 session = '20150602A'
-#hanger.h_start()
 hanger.bootstrap_start('Trades')
-hanger.menu()
 hanger.h1('Trades')
 hanger.make_form()
 print ' <form method = "get">'
