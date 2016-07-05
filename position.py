@@ -19,7 +19,6 @@ session = '20150602A'
 
 
 h.bootstrap_start('Positions')
-h.menu()
 #sessions = os.system('mysql -uroot -pwiarreft -e "show databases;" | grep 201')
 sessions = ['20150602A','20150603A']
 h.br()

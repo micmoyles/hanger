@@ -74,7 +74,7 @@ def bootstrap_close():
 	print '    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
 	print '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
 	print '    <!-- Include all compiled plugins (below), or include individual files as needed -->'
-	print '    <script src="/bootstrap/js/bootstrap.min.js"></script>'
+	print '    <script src="js/bootstrap.min.js"></script>'
 	print '	  <script src="charts.js"></script>'
 	print '  </body>'
 	print ' </html>'
