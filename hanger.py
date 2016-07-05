@@ -82,30 +82,16 @@ def bootstrap_close():
 def h_close():
 	print '</body>'
 	print '</html>'
-def make_form():
-	print '''
-<form class="form-inline">
-  <div class="form-group">
-    <label for="exampleInputName2">Name</label>
-    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail2">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-  </div>
-  <button type="submit" class="btn btn-default">Send invitation</button>
-</form>
-'''
 
 def p(text):
 	# print html paragraph
 	print '<p>' + str(text) + '</p>'
 def h1(text):
-	print '<h1>' + str(text) + '</h1>'
+	print '<h1 class="container" >' + str(text) + '</h1>'
 def h2(text):
-	print '<h2>' + str(text) + '</h2>'
+	print '<h2 class="container" >' + str(text) + '</h2>'
 def h3(text):
-	print '<h3>' + str(text) + '</h3>'
+	print '<h3 class="container" >' + str(text) + '</h3>'
 def br():
 	print '<br>'
 def showquery(text):
