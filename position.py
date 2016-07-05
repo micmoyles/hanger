@@ -16,7 +16,35 @@ host = 'localhost'
 user = 'root'
 passwd = 'wiarreft'
 session = '20150602A'
-
+form = '''
+<form method = "get">
+ Trade Date:
+ <select name="session" title="session">
+<option value="20150602A">20150602A
+<option value="20150603A">20150603A
+</select>
+<input type="submit" value="Submit">
+</form>
+<h1 class="container" >Positions</h1>
+ <form method = "get">
+ Symbol(required):<br>
+ <input type="text" name="symbol">
+ <br>
+ Exchange:<br>
+ <input type="text" name="Exchange">
+ <br>
+ Street/House:<br>
+ <select name="S-H" title="S-H">
+<option value="House" selected>House
+<option value="Street" >Street
+</select>
+ <br>
+ <input type="radio" name="sql" value="Show">Show Query<br>
+ <br>
+<input type="submit" value="Submit">
+ <br>
+</form>
+'''
 
 h.bootstrap_start('Positions')
 #sessions = os.system('mysql -uroot -pwiarreft -e "show databases;" | grep 201')
