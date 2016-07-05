@@ -2,20 +2,6 @@
 
 #script to hold common hanger functions
 
-def menu():
-	menu = ''
-	menu += str('<div>  Menu </div>| ')
-	menu += str('<a href=trades.py> Trades </a>| ')
-	menu += str('<a href=position.py> Position </a>| ')
-	menu += str('<a href=canvas.py> Live Charts </a>| ')
-	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
-	menu += str('<a href=loader.py> Loader </a>| ')
-	menu += str('<a href=messages.py> Messages </a>| ')
-	menu += str('<a href=stats.py> Hanger Stats </a>| ')
-	print '<div class="container" >'
-	print menu
-	print '</div>'
-
 def bootstrap_menu():
 	menu = ''
 	menu += str('<a href=trades.py> Trades </a>| ')
@@ -31,18 +17,8 @@ def bootstrap_menu():
 	print "</div>"
 	print "<div class='col-md-10'>"
 	print menu
-	#print "| <a href=bootstrap_book.html > BookViewer </a> | <a href=trades.py > Trades </a>| <a href=position.py> Position </a>| <a href=loader.py> Loader </a>| <a href=messages.py> Messages </a>| <a href=stats.py> Hanger Stats </a>|"
 	print "</div>"
 	print "</div>"
-
-def h_start():
-	print 'Content-Type: text/html'
-	print '\n'
-	print '<html>'
-	print '<head>'
-        print "<link rel='stylesheet' href='/hanger.css' type='text/css'/ >"
-	print '</head>'
-	print '<body>'
 
 def bootstrap_start(title):
 	print 'Content-Type: text-html'
@@ -78,10 +54,6 @@ def bootstrap_close():
 	print '	  <script src="charts.js"></script>'
 	print '  </body>'
 	print ' </html>'
-
-def h_close():
-	print '</body>'
-	print '</html>'
 
 def p(text):
 	# print html paragraph
