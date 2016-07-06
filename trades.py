@@ -6,7 +6,6 @@ import hanger
 import MySQLdb as mdb
 #form = cgi.FieldStorage()
 form = cgi.SvFormContentDict()
-#data = form.getfirst('mydata')
 symbol	  = form.get('symbol', '')
 price 	  = form.get('price', '')
 side 	  = form.get('side', '')
@@ -78,11 +77,10 @@ if symbol:
   query = extendQuery(query,"symbol = '%s' " % str(symbol) )
 if price: 
   query = extendQuery(query,"price = %d " % float(price) )
-if str(side) != 'All': 
+if str(side): 
   query = extendQuery(query,"side = '%s' " % str(side) )
 if counterparty: 
   query = extendQuery(query,"cparty = '%s' " % str(counterparty) )
-#  query+=' and cparty = "' + str(counterparty) + '"'  
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)

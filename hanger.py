@@ -48,13 +48,18 @@ def bootstrap_start(title):
 	bootstrap_menu()
 
 def bootstrap_close():
-	print '    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->'
-	print '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
-	print '    <!-- Include all compiled plugins (below), or include individual files as needed -->'
-	print '    <script src="js/bootstrap.min.js"></script>'
-	print '	  <script src="charts.js"></script>'
-	print '  </body>'
-	print ' </html>'
+	print '''
+	    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
+	     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	     <!-- Include all compiled plugins (below), or include individual files as needed -->
+	     <script src="js/bootstrap.min.js"></script>
+		   <script src="app.js"></script>
+    		   <script src="book.js"></script>
+                   <script src="sortable.js"></script
+	 	  <script src="charts.js"></script>
+	   </body>
+	  </html>
+	'''
 
 def p(text):
 	# print html paragraph
@@ -69,7 +74,7 @@ def br():
 	print '<br>'
 def showquery(text):
 	# print html paragraph
-	print '<code>' + str(text) + '</code>'
+	print '<code class="sql">' + str(text) + '</code>'
 
 def bootstrap_table(rows, cols):
 # Idea of this function is to display a html table

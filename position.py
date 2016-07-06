@@ -10,7 +10,6 @@ form = cgi.SvFormContentDict()
 session  = form.get('session', '')
 symbol	  = form.get('symbol', '')
 side 	  = form.get('side', '')
-sql 	  = form.get('sql', '')
 
 host = 'localhost'
 user = 'root'
@@ -25,65 +24,50 @@ form = '''
 </select>
 <input type="submit" value="Submit">
 </form>
-<h1 class="container" >Positions</h1>
- <form method = "get">
- Symbol(required):<br>
- <input type="text" name="symbol">
- <br>
- Exchange:<br>
- <input type="text" name="Exchange">
- <br>
- Street/House:<br>
- <select name="S-H" title="S-H">
-<option value="House" selected>House
-<option value="Street" >Street
-</select>
- <br>
- <input type="radio" name="sql" value="Show">Show Query<br>
- <br>
-<input type="submit" value="Submit">
- <br>
+<form class="form-inline container" method = "get" >
+<div class="form-group">
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+        <td>
+        <label for="exampleInputName2">Symbol</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="ECM5/ESM5">
+        </td>
+        <td>
+        <label for="exampleInputName2">Trade Side</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="B/S/T">
+        </td>
+        <td>
+        <label for="exampleInputName2">Counterparty</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="Brennan">
+        </td>
+        <td>
+        <label for="exampleInputName2">Venue</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="APX/CME">
+        </td>
+        </tr>
+    </tbody>
+</table>
+
+<button type="submit" class="btn btn-default">Submit</button>
+<button type="button" class="btn btn-info">Show Query</button>
+<button type="button" class="btn btn-updateBook">Update Book</button>
+</div>
 </form>
+
 '''
 
 h.bootstrap_start('Positions')
 #sessions = os.system('mysql -uroot -pwiarreft -e "show databases;" | grep 201')
 sessions = ['20150602A','20150603A']
 h.br()
-print ' <form method = "get">'
-print ' Trade Date:'
-print ' <select name="session" title="session">'
-for s in sessions:
-    print '<option value="'+str(s)+'">'+str(s)
-#print '<option value="Last">'
-print '</select>'
-print '<input type="submit" value="Submit">'
-print '</form>'
-h.h1('Positions')
-print ' <form method = "get">'
-print ' Symbol(required):<br>'
-print ' <input type="text" name="symbol">'
-print ' <br>'
-print ' Exchange:<br>'
-print ' <input type="text" name="Exchange">'
-print ' <br>'
-print ' Street/House:<br>'
-print ' <select name="S-H" title="S-H">'
-print '<option value="House" selected>House'
-print '<option value="Street" >Street'
-print '</select>'
-print ' <br>'
-print ' <input type="radio" name="sql" value="Show">Show Query<br>'
-print ' <br>'
-print '<input type="submit" value="Submit">'
-print ' <br>'
-print '</form>'
+print form
 
 query = 'select symbol, sum(size) as position, cparty as CounterParty from trades where'
 if symbol: query = query + ' symbol = "' + str(symbol) + '" and ' 
 sell_query = query + ' side = "S" group by symbol;' 
 buy_query = query + ' side = "B" group by symbol;' 
-if sql: h.showquery(buy_query)
+h.showquery(buy_query)
 db = mdb.connect( host, user, passwd )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
@@ -92,8 +76,9 @@ cols = map(lambda x: x[0], cursor.description)
 rows = cursor.fetchall()
 cursor.close()
 h.h2('Buy Table')
-h.table(rows,cols)
-if sql: h.showquery(sell_query)
+#h.table(rows,cols)
+h.bootstrap_table(rows,cols)
+h.showquery(sell_query)
 db = mdb.connect( host, user, passwd )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
@@ -102,7 +87,8 @@ cols = map(lambda x: x[0], cursor.description)
 rows = cursor.fetchall()
 cursor.close()
 h.h2('Sell Table')
-h.table(rows,cols)
+h.bootstrap_table(rows,cols)
+#h.table(rows,cols)
 
     
 h.bootstrap_close()
