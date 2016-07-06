@@ -67,7 +67,6 @@ form = '''
 '''
 print form
 query = 'select * from trades'
-hanger.showquery(side)
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -97,6 +96,6 @@ rows = cursor.fetchall()
 cursor.close()
 
 
-hanger.table(rows,cols)
+hanger.bootstrap_table(rows,cols)
 #hanger.h_close()
 hanger.bootstrap_close()

@@ -5,6 +5,7 @@
 def bootstrap_menu():
 	menu = ''
 	menu += str('<a href=trades.py> Trades </a>| ')
+	menu += str('<a href=bootstrap_book.html> Book Viewer </a>| ')
 	menu += str('<a href=position.py> Position </a>| ')
 	menu += str('<a href=canvas.py> Live Charts </a>| ')
 	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
@@ -69,6 +70,30 @@ def br():
 def showquery(text):
 	# print html paragraph
 	print '<code>' + str(text) + '</code>'
+
+def bootstrap_table(rows, cols):
+# Idea of this function is to display a html table
+# nCols = length cols
+# nrows = length rows
+# Header = entries of cols
+
+	print '''
+<div class="container">
+<table class="table table-striped table-hover sortable">
+'''
+	evenRow = False
+
+	nCols = len(cols)
+	print '<tr>'
+	for col in cols: print '<th>' + str(col) + '</th>' 
+	print '</tr>'
+
+	for row in rows: 
+		print "<tr>"
+		for r in row.values():
+			print '<td>' + str(r) + '</td>'
+		print '</tr>'
+	print '</table>'
 
 def table(rows, cols):
 # Idea of this function is to display a html table
