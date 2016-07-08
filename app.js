@@ -7,5 +7,8 @@ var main = function() {
 	$('.btn-menu').click(function() {
 	$('.menu-items').toggle();	
 });
+	$('.extend-menu').click(function() {
+	$('.menu-extension').toggle();	
+});
 }
 $(document).ready(main);

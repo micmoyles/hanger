@@ -12,12 +12,22 @@ def bootstrap_menu():
 	menu += str('<a href=loader.py> Loader </a>| ')
 	menu += str('<a href=messages.py> Messages </a>| ')
 	menu += str('<a href=stats.py> Hanger Stats </a>| ')
+	menu += str('<a class="extend-menu"> More </a>| ')
 	print "<div class='row container' style='font-size:18px' >"
 	print "<div class='col-md-2'>"
 	print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:120px;width:120px'>"
 	print "</div>"
 	print "<div class='col-md-10'>"
 	print menu
+	print "</div>"
+	print "</div>"
+
+	print "<div class='row container' style='font-size:18px' >"
+	print "<div class='col-md-2'>"
+	print ""
+	print "</div>"
+	print "<div class='col-md-10'>"
+	print str('<a class"menu-extension" href=trades.py> Trades </a>| ')
 	print "</div>"
 	print "</div>"
 
