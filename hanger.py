@@ -65,7 +65,7 @@ def bootstrap_close():
 	     <script src="js/bootstrap.min.js"></script>
 		   <script src="app.js"></script>
     		   <script src="book.js"></script>
-                   <script src="sortable.js"></script
+                   <script src="sortable.js"></script>
 	 	  <script src="charts.js"></script>
 	   </body>
 	  </html>
