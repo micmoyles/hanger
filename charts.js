@@ -25,8 +25,14 @@ chart.render();
 
     var xVal = dps.length + 1;
     var yVal = 100;	
-    var updateInterval = 500;
+    var updateInterval = 1000;
      
+    $('.btn-pause').click(function () {
+	clearInterval(interval);
+    });
+    $('.btn-resume').click(function () {
+	setInterval(function(){updateChart()}, updateInterval);
+    });
     var updateChart = function () {
     	
     	
@@ -39,12 +45,9 @@ chart.render();
     		xVal++;
     	
     	chart.render();		
-    	
-     
+};	
     	// update chart after specified time. 
-     
-    };
-    setInterval(function(){updateChart()}, updateInterval); 
+    var interval = setInterval(function(){updateChart()}, updateInterval); 
     
     var doughnutChart = new CanvasJS.Chart("doughnutChartContainer",
     {

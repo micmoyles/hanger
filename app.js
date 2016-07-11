@@ -3,10 +3,7 @@ var main = function() {
 	$('.btn-info').click(function() {
 	$('.sql').toggle();	
 });
-
-	$('.btn-menu').click(function() {
-	$('.menu-items').toggle();	
-});
+	$('.menu-extension').hide();	
 	$('.extend-menu').click(function() {
 	$('.menu-extension').toggle();	
 });
