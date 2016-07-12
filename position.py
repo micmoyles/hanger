@@ -10,6 +10,8 @@ form = cgi.SvFormContentDict()
 session  = form.get('session', '')
 symbol	  = form.get('symbol', '')
 side 	  = form.get('side', '')
+venue	  = form.get('venue', '')
+counterparty = form.get('counterparty', '')
 
 host = 'localhost'
 user = 'root'
@@ -31,19 +33,19 @@ form = '''
         <tr>
         <td>
         <label for="exampleInputName2">Symbol</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="ECM5/ESM5">
+        <input name="symbol" type="text" class="form-control" id="exampleInputName2" placeholder="ECM5/ESM5">
         </td>
         <td>
         <label for="exampleInputName2">Trade Side</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="B/S/T">
+        <input name="side" type="text" class="form-control" id="exampleInputName2" placeholder="B/S/T">
         </td>
         <td>
         <label for="exampleInputName2">Counterparty</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="Brennan">
+        <input name="counterparty" type="text" class="form-control" id="exampleInputName2" placeholder="Brennan">
         </td>
         <td>
         <label for="exampleInputName2">Venue</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="APX/CME">
+        <input name="venue" type="text" class="form-control" id="exampleInputName2" placeholder="APX/CME">
         </td>
         </tr>
     </tbody>
@@ -65,6 +67,7 @@ print form
 
 query = 'select symbol, sum(size) as position, cparty as CounterParty from trades where'
 if symbol: query = query + ' symbol = "' + str(symbol) + '" and ' 
+if counterparty: query = query + ' cparty = "' + str(counterparty) + '" and ' 
 sell_query = query + ' side = "S" group by symbol;' 
 buy_query = query + ' side = "B" group by symbol;' 
 h.showquery(buy_query)
@@ -76,7 +79,6 @@ cols = map(lambda x: x[0], cursor.description)
 rows = cursor.fetchall()
 cursor.close()
 h.h2('Buy Table')
-#h.table(rows,cols)
 h.bootstrap_table(rows,cols)
 h.showquery(sell_query)
 db = mdb.connect( host, user, passwd )
@@ -88,7 +90,6 @@ rows = cursor.fetchall()
 cursor.close()
 h.h2('Sell Table')
 h.bootstrap_table(rows,cols)
-#h.table(rows,cols)
 
     
 h.bootstrap_close()
