@@ -59,7 +59,7 @@ form = '''
 
 '''
 
-h.bootstrap_start('Positions')
+h.start('Positions')
 #sessions = os.system('mysql -uroot -pwiarreft -e "show databases;" | grep 201')
 sessions = ['20150602A','20150603A']
 h.br()

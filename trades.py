@@ -19,7 +19,7 @@ host = 'localhost'
 user = 'root'
 passwd = 'wiarreft'
 session = '20150602A'
-hanger.bootstrap_start('Trades')
+hanger.start('Trades')
 hanger.h1('Trades')
 form = '''
 <form class="form-inline container" method = "get" >

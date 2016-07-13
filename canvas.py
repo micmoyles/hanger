@@ -4,7 +4,7 @@ import cgi, cgitb; cgitb.enable()
 import sys
 import hanger
 
-hanger.bootstrap_start('Charts')
+hanger.start('Charts')
 hanger.h1('Charts')
 
 print('<div id="chartContainer" style="height: 300px; width: 100%;"></div>')

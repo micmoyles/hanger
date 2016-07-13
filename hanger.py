@@ -31,7 +31,7 @@ def bootstrap_menu():
 	print "</div>"
 	print "</div>"
 
-def bootstrap_start(title):
+def start(title):
 	print 'Content-Type: text-html'
 	print '\n' # new line needed to identify html header
 	print '<html>'
