@@ -135,7 +135,3 @@ def table(rows, cols):
 		elif not evenRow:
 			evenRow = True
 	print '</table>'
-
-
-
-
