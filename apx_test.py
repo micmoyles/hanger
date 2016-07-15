@@ -7,6 +7,7 @@ DESCRIPTION = """
 
 import os
 import sys
+sys.path.append('/home/mmoyles/stomp.py-4.1.8')
 import yaml
 import time
 import stomp
