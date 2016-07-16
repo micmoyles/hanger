@@ -92,4 +92,4 @@ h.h2('Sell Table')
 h.bootstrap_table(rows,cols)
 
     
-h.bootstrap_close()
+h.close()

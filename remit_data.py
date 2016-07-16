@@ -8,4 +8,4 @@ page = urllib.urlopen(abc)
 data = page.read()
 soup = bs4.BeautifulSoup(data, 'html.parser')
 table = soup.findAll('table', id='myTable1')
-print type(table)
+print table

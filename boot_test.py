@@ -6,4 +6,4 @@ import hanger
 hanger.start()
 hanger.menu()
 hanger.h1('Trades')
-hanger.bootstrap_close()
+hanger.close()

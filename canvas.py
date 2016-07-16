@@ -13,4 +13,4 @@ print('<button type="button" class="btn btn-info btn-resume">Resume</button>')
 print('</br>')
 print('<div id="doughnutChartContainer" style="height: 300px; width: 100%;"></div>')
 
-hanger.bootstrap_close()
+hanger.close()

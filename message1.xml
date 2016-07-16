@@ -1,0 +1,46 @@
+<msgGrp>
+	<pubTs>2016-07-15 21:54:12:GMT</pubTs>
+	<flow>FREQ</flow>
+<msg>
+	<subject>BMRA.SYSTEM.FREQ</subject>
+<row>
+	<TS>2016-07-15 21:52:00:GMT</TS>
+	<SF>50.062</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:52:15:GMT</TS>
+	<SF>50.035</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:52:30:GMT</TS>
+	<SF>50.041</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:52:45:GMT</TS>
+	<SF>50.037</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:53:00:GMT</TS>
+	<SF>50.038</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:53:15:GMT</TS>
+	<SF>50.027</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:53:30:GMT</TS>
+	<SF>50.058</SF>
+</row>
+
+<row>
+	<TS>2016-07-15 21:53:45:GMT</TS>
+	<SF>50.042</SF>
+</row>
+</msg>
+</msgGrp>

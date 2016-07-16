@@ -2,7 +2,7 @@
 
 #script to hold common hanger functions
 
-def bootstrap_menu():
+def menu():
 	menu = ''
 	menu += str('<a href=trades.py> Trades </a>| ')
 	menu += str('<a href=bootstrap_book.html> Book Viewer </a>| ')
@@ -56,9 +56,9 @@ def start(title):
 	print '  </head>'
 	print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'>"
 	print '  <body class="container">'
-	bootstrap_menu()
+	menu()
 
-def bootstrap_close():
+def close():
 	print '''
 	    <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
 	     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

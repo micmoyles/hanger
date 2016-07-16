@@ -96,4 +96,4 @@ cursor.close()
 
 hanger.bootstrap_table(rows,cols)
 #hanger.h_close()
-hanger.bootstrap_close()
+hanger.close()

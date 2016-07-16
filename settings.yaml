@@ -5,7 +5,7 @@ connection:
     vhost: /AAAAAAAAAAAAA
     login: h7hmcsud0ubiqss
     passcode: h7hmcsud0ubiqss
-    client_id: testClient123
+    client_id: testClient234
   
 subscription:
     subscriptionid: mySubscriptionId

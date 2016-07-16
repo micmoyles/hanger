@@ -6,4 +6,4 @@ import hanger
 
 hanger.start('Home')
 hanger.h1('Home')
-hanger.bootstrap_close()
+hanger.close()
