@@ -5,6 +5,8 @@ import struct
 import sys,log,os
 from apx_test import XmlDictConfig
 import xml.etree.ElementTree
+from time import sleep
+import MySQLdb as mdb
 
 class EApp:
     def __init__(self, name):
@@ -18,41 +20,51 @@ class loader(EApp):
         EApp.__init__(self,name)
 	self.root_directory = root_directory
         self.db = database_host
+        self.sql = 'mysql'
+        self.username = None
+        self.passwd = None
+        self.cleanup = True
         self.timeout = 2.0
         assert os.path.exists(self.root_directory),'Could not find root directory, not continuing'
         
     def _parse(self,xmlfile):
-        xmlfile = str(self.root_directory) + '/' + str(xmlfile)
         tree = xml.etree.ElementTree.parse(xmlfile)
         root = tree.getroot()
         msg = XmlDictConfig(root)
+        log.info(msg)
+        if 'flow' not in msg.keys(): return 0
         if msg['flow'] != 'FREQ':
-           continue
+           return 0
         SF = msg['msg']['row']['SF'] 
         TS = msg['msg']['row']['TS'] 
         TS = TS.strip(':GMT')
-        cmd = 'insert into frequency vales ( %s , %d ) ' % (str(TS), SF) 
+        db_cmd = 'use REMIT'
+        if self.sql == 'mysql': load_cmd = 'insert into frequency values ( " %s " , %f ) ' % (str(TS), float(SF) ) 
+        log.info( load_cmd )
+        db = mdb.connect( self.db, self.username , self.passwd )
+        cursor = db.cursor(mdb.cursors.DictCursor)
+        cursor.execute( db_cmd )
+        cursor.execute( load_cmd )
+        db.commit()
+        cursor.close()
+        return 0
 	
 
     def get_file(self):
         file_list = os.listdir(self.root_directory)
+        if len(file_list) == 0: return None
         this_file = sorted(file_list)[0] #choose newest file
 	log.info(this_file)
-        return this_file
+        return str(self.root_directory) + '/' + str(this_file)
 	
     def __start__(self):
+        assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
         while True:
-            self._parse(self.get_file())
-            sleep(self.timeout)
-            
-
-#class middleMan(talker):
-## this will open a tcp socket and listen to commands from the GUI
-#    def __init__(self, name):
-#        talker.__init__(self,name)      
-#
-#class msg_loader(talker):
-## this will listen to all messages and load the relevant ones to the hanger 
-#    def __init__(self, name):
-#        talker.__init__(self,name)      
+            sleep( self.timeout )
+            current_file = self.get_file()
+            if current_file is None: continue 
+            self._parse( current_file )
+            if self.cleanup: 
+                log.info('Deleting %s' % str(current_file)) 
+                os.remove(current_file)
 
