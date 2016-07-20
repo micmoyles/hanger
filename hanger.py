@@ -10,7 +10,7 @@ def menu():
 	menu += str('<a href=canvas.py> Live Charts </a>| ')
 	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
-	menu += str('<a href=messages.py> Messages </a>| ')
+	menu += str('<a href=remit.py> REMIT Data </a>| ')
 	menu += str('<a href=stats.py> Hanger Stats </a>| ')
 	menu += str('<a class="extend-menu"> More </a>| ')
 	print "<div class='row container' style='font-size:18px' >"
