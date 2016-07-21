@@ -10,9 +10,8 @@ def menu():
 	menu += str('<a href=canvas.py> Live Charts </a>| ')
 	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
-	menu += str('<a href=messages.py> Messages </a>| ')
-	menu += str('<a href=stats.py> Hanger Stats </a>| ')
-	menu += str('<a class="extend-menu"> More </a>| ')
+	menu += str('<a href=REMIT > Messages </a>| ')
+	menu += str('<a class="extend-menu" > REMIT </a>| ')
 	print "<div class='row container' style='font-size:18px' >"
 	#print "<div class='col-md-2'>"
 	#print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'>"
@@ -27,7 +26,10 @@ def menu():
 #	print ""
 #	print "</div>"
 	print "<div class='col-md-12'>"
-	print str('<a class="menu-extension" href=trades.py> Trades |</a> ')
+	print str('<a class="menu-extension" href=remit.py> System Frequency |</a> ')
+	print str('<a class="menu-extension" href=demand.py> Demand |</a> ')
+	print str('<a class="menu-extension" href=supply.py> Supply |</a> ')
+	print str('<a class="menu-extension" href=outage.py> Outage Notifications |</a> ')
 	print "</div>"
 	print "</div>"
 
@@ -106,7 +108,7 @@ def bootstrap_table(rows, cols):
 
 	for row in rows: 
 		print "<tr>"
-		for r in row.values():
+		for r in row:
 			print '<td>' + str(r) + '</td>'
 		print '</tr>'
 	print '</table>'
