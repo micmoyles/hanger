@@ -23,14 +23,14 @@ def dump_xml(message):
     base = dump + str(datetime.datetime.now().strftime('%Y%m%d')) 
     dirlist = os.listdir(dump)
     if len(dirlist) == 0: 
-        counter = '001'
+        counter = '0001'
     else:
         lastFile = sorted(dirlist)[len(dirlist) - 1]
         c = lastFile.split('-')[1] # 003.xml
         counter = c.split('.')[0] # 003
         counter = int(counter)
         counter=counter+1
-        counter = '%03d' % counter
+        counter = '%003d' % counter
     newFile = base + '-' + str(counter) + '.xml'
     handle = open(newFile,'wb')
     handle.write(message)
