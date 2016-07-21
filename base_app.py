@@ -34,14 +34,27 @@ class loader(EApp):
         root = tree.getroot()
         msg = XmlDictConfig(root)
         log.info(msg)
+        db_cmd = 'use REMIT'
         if 'flow' not in msg.keys(): return 0
         if msg['flow'] not in self.whiteList:
            return 0
-        SF = msg['msg']['row']['SF'] 
-        TS = msg['msg']['row']['TS'] 
-        TS = TS.strip(':GMT')
-        db_cmd = 'use REMIT'
-        if self.sql == 'mysql': load_cmd = 'insert ignore into frequency values ( " %s " , %f ) ' % (str(TS), float(SF) ) 
+        if msg['flow'] == 'FREQ':
+           SF = msg['msg']['row']['SF'] 
+           TS = msg['msg']['row']['TS'] 
+           TS = TS.strip(':GMT')
+           if self.sql == 'mysql': load_cmd = 'insert ignore into frequency values ( " %s " , %f ) ' % (str(TS), float(SF) ) 
+        elif msg['flow'] == 'SOSO':
+           data = msg['msg']['row']
+           pubTs = msg['pubTs']
+           PT = data['PT']
+           TD = data['TD'] 
+           IC = data['IC']
+           ST = data['ST']
+           TT = data['TT']
+           TQ = data['TQ']
+#  create table SOSO ( pubTs timestamp, PT float(10,5) , TD varchar(3), IC varchar(30), ST timestamp, TT varchar(30), TQ int(100) ,unique(pubTs) );
+           load_cmd = 'insert ignore into SOSO values ( " %s " , %f," %s ", " %s " , " %s ", " %s ", %d ) ' % (str(pubTs), float(PT), TD, IC, ST, TT, int(TQ) ) 
+
         log.info( load_cmd )
         db = mdb.connect( self.db, self.username , self.passwd )
         cursor = db.cursor(mdb.cursors.DictCursor)
