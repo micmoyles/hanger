@@ -56,15 +56,23 @@ class loader(EApp):
         this_file = sorted(file_list)[0] #choose newest file
 	log.info(this_file)
         return str(self.root_directory) + '/' + str(this_file)
+
+   def load_and_clear( self ):
+        current_file = self.get_file()
+        if current_file is None: return 
+        self._parse( current_file )
+        log.info( 'Deleting %s' % str( current_file ) ) 
+        os.remove( current_file )
+       
+   def loadDirectory( self ):
+        file_list = os.listdir( self.root_directory )
+        for f in file_list:
+            self._parse( f )
 	
     def __start__(self):
         assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
         while True:
             sleep( self.timeout )
-            current_file = self.get_file()
-            if current_file is None: continue 
-            self._parse( current_file )
-            if self.cleanup: 
-                log.info('Deleting %s' % str(current_file)) 
-                os.remove(current_file)
+            if self.cleanup: self.load_and_clear()
+            else: self.loadDirectory()
 
