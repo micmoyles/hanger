@@ -13,30 +13,8 @@ import yaml
 import time
 import stomp
 import xml.etree.ElementTree
-import log
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
-
-def dump_xml(message):
-    dump = '/home/mmoyles/REMIT/'
-    assert os.path.exists(dump), 'Missing %s directory' % dump
-    base = dump + str(datetime.datetime.now().strftime('%Y%m%d')) 
-    dirlist = os.listdir(dump)
-    if len(dirlist) == 0: 
-        counter = '001'
-    else:
-        lastFile = sorted(dirlist)[len(dirlist) - 1]
-        c = lastFile.split('-')[1] # 003.xml
-        counter = c.split('.')[0] # 003
-        counter = int(counter)
-        counter=counter+1
-        counter = '%03d' % counter
-    newFile = base + '-' + str(counter) + '.xml'
-    handle = open(newFile,'wb')
-    handle.write(message)
-    handle.write("\n")
-    handle.close()
-    log.info( 'Wrote file %s' % str(newFile) )
 
 class XmlDictConfig(dict):
     '''
@@ -102,10 +80,9 @@ class MyListener(stomp.ConnectionListener):
         print('   !!!!!! Received an error \n%s' % message)
 
     def on_message(self, headers, message):
-        dump_xml(message)
-        #data = xml.etree.ElementTree.XML(message) 
-	#xmldict = XmlDictConfig(data)
-	#print xmldict
+        data = xml.etree.ElementTree.XML(message) 
+	xmldict = XmlDictConfig(data)
+	print xmldict
 	#for node in data.iter(): print node.tag
        	#print('   ****** Received a message \n%s %s' % (str(datetime.datetime.now()) , message))
 
@@ -126,12 +103,12 @@ def main():
                  headers=conn_headers,
                  wait=True)
 
-    log.info("connected")
+    print("connected")
 
     conn.subscribe(destination=config['subscription']['topic'],
                    id=config['subscription']['subscriptionid'],
                    ack=config['subscription']['ack'])
-    log.info("subscribed")
+    print("subscribed")
 
     try:
         while True:
