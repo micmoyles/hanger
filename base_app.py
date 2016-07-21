@@ -9,15 +9,13 @@ from time import sleep
 import MySQLdb as mdb
 
 class EApp:
-    def __init__(self, name):
-        self.name = name
-        log.info('Starting... %s' % (self.name))
+    def __init__(self):
 	self.launchtime = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 class loader(EApp):
         # this needs to parse the XML file and upload it to the database
-    def __init__(self,name,root_directory,database_host):
-        EApp.__init__(self,name)
+    def __init__(self,root_directory,database_host):
+        EApp.__init__(self)
 	self.root_directory = root_directory
         self.db = database_host
         self.sql = 'mysql'
@@ -25,6 +23,10 @@ class loader(EApp):
         self.passwd = None
         self.cleanup = True
         self.timeout = 2.0
+        self.blacklist = []
+        self.whitelist = []
+        self.isBlack = False
+        self.isWhite  = False
         assert os.path.exists(self.root_directory),'Could not find root directory, not continuing'
         
     def _parse(self,xmlfile):
@@ -71,6 +73,11 @@ class loader(EApp):
 	
     def __start__(self):
         assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
+        assert (len(self.whitelist) != 0 ) and (len(self.backlist) != 0 ), "Cannot have a whitelist and a blacklist"
+        if len(self.whitelist) != 0:
+            self.isWhite = True
+        if len(self.blacklist) != 0:
+            self.isBlack = True
         log.info( self.__dict__ )
         while True:
             sleep( self.timeout )
