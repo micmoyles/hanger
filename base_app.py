@@ -39,7 +39,7 @@ class loader(EApp):
         TS = msg['msg']['row']['TS'] 
         TS = TS.strip(':GMT')
         db_cmd = 'use REMIT'
-        if self.sql == 'mysql': load_cmd = 'insert into frequency values ( " %s " , %f ) ' % (str(TS), float(SF) ) 
+        if self.sql == 'mysql': load_cmd = 'insert ignore into frequency values ( " %s " , %f ) ' % (str(TS), float(SF) ) 
         log.info( load_cmd )
         db = mdb.connect( self.db, self.username , self.passwd )
         cursor = db.cursor(mdb.cursors.DictCursor)
@@ -57,20 +57,21 @@ class loader(EApp):
 	log.info(this_file)
         return str(self.root_directory) + '/' + str(this_file)
 
-   def load_and_clear( self ):
+    def load_and_clear( self ):
         current_file = self.get_file()
         if current_file is None: return 
         self._parse( current_file )
         log.info( 'Deleting %s' % str( current_file ) ) 
         os.remove( current_file )
        
-   def loadDirectory( self ):
+    def loadDirectory( self ):
         file_list = os.listdir( self.root_directory )
         for f in file_list:
-            self._parse( f )
+            self._parse( str(self.root_directory) + '/' + f )
 	
     def __start__(self):
         assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
+        log.info( self.__dict__ )
         while True:
             sleep( self.timeout )
             if self.cleanup: self.load_and_clear()
