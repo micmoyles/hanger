@@ -81,6 +81,12 @@ if price:
   query = extendQuery(query,"PT = %f " % float(price) )
 if interconnectorID: 
   query = extendQuery(query,"IC = '%s' " % str(interconnectorID) )
+if TD: 
+  query = extendQuery(query,"TD = '%s' " % str(TD) )
+if TT: 
+  query = extendQuery(query,"TT = %d " % int(TT) )
+if settlement: 
+  query = extendQuery(query,"ST = %d " % str(settlement) )
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
