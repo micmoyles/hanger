@@ -2,6 +2,11 @@
 
 #script to hold common hanger functions
 
+user = 'root'
+password = 'wiarreft'
+host = 'localhost'
+
+
 def menu():
 	menu = ''
 	menu += str('<a href=trades.py> Trades </a>| ')
@@ -27,9 +32,7 @@ def menu():
 #	print "</div>"
 	print "<div class='col-md-12'>"
 	print str('<a class="menu-extension" href=remit.py> System Frequency |</a> ')
-	print str('<a class="menu-extension" href=demand.py> Demand |</a> ')
-	print str('<a class="menu-extension" href=supply.py> Supply |</a> ')
-	print str('<a class="menu-extension" href=outage.py> Outage Notifications |</a> ')
+	print str('<a class="menu-extension" href=trade_prints.py> Trade Prints |</a> ')
 	print "</div>"
 	print "</div>"
 

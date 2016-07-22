@@ -86,17 +86,23 @@ class loader(EApp):
 	
     def __start__(self):
 
-        assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
-        assert (len(self.whitelist)  * len(self.blacklist)) == 0 , "Cannot have a whitelist and a blacklist %d %d" % (len(self.whitelist), len(self.blacklist))
+       assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
+       assert (len(self.whitelist)  * len(self.blacklist)) == 0 , "Cannot have a whitelist and a blacklist %d %d" % (len(self.whitelist), len(self.blacklist))
 
-        if len(self.whitelist) != 0:
-            self.isWhite = True
-        if len(self.blacklist) != 0:
-            self.isBlack = True
-        log.info( self.__dict__ )
+       if len(self.whitelist) != 0:
+          self.isWhite = True
+       if len(self.blacklist) != 0:
+          self.isBlack = True
+       log.info( self.__dict__ )
 
-        while True:
-            sleep( self.timeout )
-            if self.cleanup: self.load_and_clear()
-            else: self.loadDirectory()
+       if self.cleanup: 
+          while True:
+             self.load_and_clear()
+             sleep( self.timeout )
+       else: 
+          self.loadDirectory()
+          log.info('Directory loaded. Exiting')
+          sys.exit()
+
+
 

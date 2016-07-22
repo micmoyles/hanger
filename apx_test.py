@@ -30,7 +30,7 @@ def dump_xml(message):
         counter = c.split('.')[0] # 003
         counter = int(counter)
         counter=counter+1
-        counter = '%003d' % counter
+        counter = '%04d' % counter
     newFile = base + '-' + str(counter) + '.xml'
     handle = open(newFile,'wb')
     handle.write(message)
