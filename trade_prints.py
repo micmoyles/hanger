@@ -75,27 +75,29 @@ def extendQuery(query,text):
     query+=' where '+text
   return query
 
-if symbol: 
-  query = extendQuery(query,"symbol = '%s' " % str(symbol) )
+if size: 
+  query = extendQuery(query,"TQ = %d " % int(size) )
 if price: 
-  query = extendQuery(query,"price = %d " % float(price) )
-if str(side): 
-  query = extendQuery(query,"side = '%s' " % str(side) )
-if counterparty: 
-  query = extendQuery(query,"cparty = '%s' " % str(counterparty) )
+  query = extendQuery(query,"PT = %f " % float(price) )
+if interconnectorID: 
+  query = extendQuery(query,"IC = '%s' " % str(interconnectorID) )
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
 
-db = mdb.connect( host, user, passwd )
+db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
+cols = ['Publication Time','Trade Price','Something','Interconnector','Settlement Time','Something Else','Quantity']
 rows = cursor.fetchall()
 cursor.close()
+d = []
+for row in rows:
+  d.append((str(row['pubTs']),row['PT'],row['TD'],row['IC'],row['ST'],row['TT'],row['TQ']))
+rows = d
 
 
 hanger.bootstrap_table(rows,cols)
-#hanger.h_close()
 hanger.close()
