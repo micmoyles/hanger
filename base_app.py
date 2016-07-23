@@ -9,9 +9,15 @@ from time import sleep
 import MySQLdb as mdb
 
 class EApp:
-    def __init__(self):
+    def __init__( self ):
 	self.launchtime = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        self.status = True
 
+    def writeStatus( self ):
+        statusPath = '/home/mmoyles/status/'
+        assert os.path.exists( statusPath ),'Could not find status directory, not continuing'
+        
+        pass
 class loader(EApp):
         # this needs to parse the XML file and upload it to the database
     def __init__(self,root_directory,database_host):
@@ -88,7 +94,7 @@ class loader(EApp):
 
        assert (self.username is not None) and (self.passwd is not None) and (self.db is not None), 'Loader needs username, password and host configured'
        assert (len(self.whitelist)  * len(self.blacklist)) == 0 , "Cannot have a whitelist and a blacklist %d %d" % (len(self.whitelist), len(self.blacklist))
-
+       if self.status: self.writeStatus()
        if len(self.whitelist) != 0:
           self.isWhite = True
        if len(self.blacklist) != 0:
