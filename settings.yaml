@@ -12,3 +12,5 @@ subscription:
     topic: /topic/bmrsTopic
     ack: auto
 
+RESTApi:
+    key: jsp06qkyw8zr8uw
