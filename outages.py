@@ -17,8 +17,8 @@ settlement	  = form.get('settlement', '')
 sql 	  = form.get('sql', '')
 
 session = 'REMIT'
-hanger.start('IC Prices')
-hanger.h1('InterConnector Prices')
+hanger.start('Outages')
+hanger.h1('Outages')
 form = '''
 <form class="form-inline container" method = "get" >
 <div class="form-group">
@@ -66,8 +66,8 @@ form = '''
 </div>
 </form>
 '''
-print form
-query = 'select * from SOSO'
+#print form
+query = 'select *  from outages'
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -96,7 +96,8 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
-cols = ['Publication Time','Offer Price','Side','Quantity','Offer ID','Settlement Time','Counterparty']
+#cols = ['Publication Time','Offer Price','Side','Quantity','Offer ID','Settlement Time','Counterparty']
+cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
 rows = cursor.fetchall()
 cursor.close()
 d = []

@@ -28,6 +28,7 @@ def menu():
 	print "<div class='col-md-12'>"
 	print str('<a class="menu-extension" href=frequency.py> System Frequency |</a> ')
 	print str('<a class="menu-extension" href=soso_prints.py> SO-SO Prints |</a> ')
+	print str('<a class="menu-extension" href=outages.py> Outages |</a> ')
 	print "</div>"
 	print "</div>"
 
