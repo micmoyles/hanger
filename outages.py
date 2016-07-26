@@ -71,12 +71,8 @@ if AffectedUnit:
   query = extendQuery(query,"AffectedUnit = %f " % str(AffectedUnit) )
 if EventType: 
   query = extendQuery(query,"EventType = '%s' " % str(EventType) )
-if AssetId: 
-  query = extendQuery(query,"AssetId = '%s' " % str(AssetId))
-if TT: 
-  query = extendQuery(query,"TT = %d " % int(TT) )
-if settlement: 
-  query = extendQuery(query,"ST = %d " % str(settlement) )
+if AssetID: 
+  query = extendQuery(query,"AssetID = '%s' " % str(AssetID))
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
@@ -87,7 +83,7 @@ cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['AffectedUnit','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','FuelType']
+cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MH']
 rows = cursor.fetchall()
 cursor.close()
 d = []
@@ -95,12 +91,13 @@ for row in rows:
   d.append(( str(row['AffectedUnit']),
            str(row['AssetId']),
            str(row['EventType']),
-           row['NormalCap'],
-           row['AvailCap'],
+           row['NormalCapacity'],
+           row['AvailableCapacity'],
            str(row['EventStatus']),
            str(row['EventStart']),
            str(row['EventEnd']),
-           str(row['FuelType'])
+           str(row['FuelType']),
+           str(row['MessageHeading'])
 ))
 rows = d
 
