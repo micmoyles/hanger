@@ -48,14 +48,6 @@ form = '''
         <label for="exampleInputName2">Fuel Type</label>
         <input type="text" name="FuelType" class="form-control" id="exampleInputName2">
         </td>
-        <td>
-        <label for="exampleInputName2">TD</label>
-        <input type="text" name="TD" class="form-control" id="exampleInputName2" placeholder="A01">
-        </td>
-        <td>
-        <label for="exampleInputName2">Settlement Time</label>
-        <input type="text" name="settlement" class="form-control" id="exampleInputName2" placeholder="20160715 15:00:00">
-        </td>
         </tr>
     </tbody>
 </table>
@@ -73,14 +65,14 @@ def extendQuery(query,text):
     query+=' where '+text
   return query
 
-if size: 
-  query = extendQuery(query,"TQ = %d " % int(size) )
-if price: 
-  query = extendQuery(query,"PT = %f " % float(price) )
-if interconnectorID: 
-  query = extendQuery(query,"IC = '%s' " % str(interconnectorID) )
-if TD: 
-  query = extendQuery(query,"TD = '%s' " % str(TD) )
+if EventStatus: 
+  query = extendQuery(query,"EventStatus = %d " % str(EventStatus) )
+if AffectedUnit: 
+  query = extendQuery(query,"AffectedUnit = %f " % str(AffectedUnit) )
+if EventType: 
+  query = extendQuery(query,"EventType = '%s' " % str(EventType) )
+if AssetId: 
+  query = extendQuery(query,"AssetId = '%s' " % str(AssetId))
 if TT: 
   query = extendQuery(query,"TT = %d " % int(TT) )
 if settlement: 
