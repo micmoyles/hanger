@@ -18,8 +18,6 @@ def menu():
 	menu += str('<a href=REMIT > Messages </a>| ')
 	menu += str('<a class="extend-menu" > REMIT </a>| ')
 	print "<div class='row container' style='font-size:18px' >"
-	#print "<div class='col-md-2'>"
-	#print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'>"
 	print "</div>"
 	print "<div class='col-md-12'>"
 	print menu
@@ -27,9 +25,6 @@ def menu():
 	print "</div>"
 
 	print "<div class='row container' style='font-size:18px' >"
-#	print "<div class='col-md-2'>"
-#	print ""
-#	print "</div>"
 	print "<div class='col-md-12'>"
 	print str('<a class="menu-extension" href=remit.py> System Frequency |</a> ')
 	print str('<a class="menu-extension" href=trade_prints.py> Trade Prints |</a> ')
