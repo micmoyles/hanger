@@ -6,14 +6,12 @@ import hanger
 import MySQLdb as mdb
 #form = cgi.FieldStorage()
 form = cgi.SvFormContentDict()
-pubTsfrom	  = form.get('pubTsfrom', '')
-pubTsto	  = form.get('pubTsto', '')
-price 	  = form.get('price', '')
-size 	  = form.get('size', '')
-TD   = form.get('TD', '')
-TT   = form.get('TT', '')
-interconnectorID     = form.get('interconnectorID', '')
-settlement	  = form.get('settlement', '')
+EventStatus	  = form.get('EventStatus', '')
+AssetType	  = form.get('AssetType', '')
+AffectedUnit 	  = form.get('AffectedUnit', '')
+AssetID 	  = form.get('AssetID', '')
+EventType         = form.get('EventType', '')
+FuelType          = form.get('FuelType', '')
 sql 	  = form.get('sql', '')
 
 session = 'REMIT'
@@ -26,29 +24,29 @@ form = '''
     <tbody>
         <tr>
         <td>
-        <label for="exampleInputName2">pubTs from</label>
-        <input type="text" name="pubTs" class="form-control" id="exampleInputName2" placeholder="20160714 14:00:00">
+        <label for="exampleInputName2">Event Status</label>
+        <input type="text" name="EventStatus" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">pubTs to</label>
-        <input type="text" name="pubTs" class="form-control" id="exampleInputName2" placeholder="20160714 14:00:00">
+        <label for="exampleInputName2">Asset Type</label>
+        <input type="text" name="AssetType" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">Price</label>
-        <input type="text" name="price" class="form-control" id="exampleInputName2" placeholder="123.45">
+        <label for="exampleInputName2">Affected Unit</label>
+        <input type="text" name="AffectedUnit" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">Size</label>
-        <input type="text" name="size" class="form-control" id="exampleInputName2" placeholder="100">
+        <label for="exampleInputName2">Asset ID</label>
+        <input type="text" name="AssetID" class="form-control" id="exampleInputName2">
         </td>
         <tr>
         <td>
-        <label for="exampleInputName2">InterConnectorID</label>
-        <input type="text" name="interconnectorID" class="form-control" id="exampleInputName2" >
+        <label for="exampleInputName2">Event Type</label>
+        <input type="text" name="EventType" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">TT</label>
-        <input type="text" name="TT" class="form-control" id="exampleInputName2" placeholder="BALIT_RTE">
+        <label for="exampleInputName2">Fuel Type</label>
+        <input type="text" name="FuelType" class="form-control" id="exampleInputName2">
         </td>
         <td>
         <label for="exampleInputName2">TD</label>
@@ -66,7 +64,7 @@ form = '''
 </div>
 </form>
 '''
-#print form
+print form
 query = 'select *  from outages'
 def extendQuery(query,text):
   if 'where' in query:
@@ -97,14 +95,12 @@ cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['AffectedUnitEIC','AssetType','AffectedUnit','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','FuelType','Participant_MarketParticipantID']
+cols = ['AffectedUnit','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','FuelType']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
-  d.append((str(row['AffectedUnitEIC']),
-           str(row['AssetType']),
-           str(row['AffectedUnit']),
+  d.append(( str(row['AffectedUnit']),
            str(row['AssetId']),
            str(row['EventType']),
            row['NormalCap'],
@@ -112,8 +108,7 @@ for row in rows:
            str(row['EventStatus']),
            str(row['EventStart']),
            str(row['EventEnd']),
-           str(row['FuelType']),
-           str(row['ParticipantID'])
+           str(row['FuelType'])
 ))
 rows = d
 
