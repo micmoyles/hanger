@@ -96,13 +96,25 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
-#cols = ['Publication Time','Offer Price','Side','Quantity','Offer ID','Settlement Time','Counterparty']
-cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
+#cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
+cols = ['AffectedUnitEIC','AssetType','AffectedUnit','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','FuelType','Participant_MarketParticipantID']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
-  d.append((str(row['pubTs']),row['PT'],row['TD'],row['TQ'],row['IC'],row['ST'],row['TT']))
+  d.append((str(row['AffectedUnitEIC']),
+           str(row['AssetType']),
+           str(row['AffectedUnit']),
+           str(row['AssetId']),
+           str(row['EventType']),
+           row['NormalCapacity'],
+           row['AvailableCapacity'],
+           str(row['EventStatus']),
+           str(row['EventStart']),
+           str(row['EventEnd']),
+           str(row['FuelType']),
+           str(row['Participant_MarketParticipantID'])
+))
 rows = d
 
 
