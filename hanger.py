@@ -26,8 +26,8 @@ def menu():
 
 	print "<div class='row container' style='font-size:18px' >"
 	print "<div class='col-md-12'>"
-	print str('<a class="menu-extension" href=remit.py> System Frequency |</a> ')
-	print str('<a class="menu-extension" href=trade_prints.py> Trade Prints |</a> ')
+	print str('<a class="menu-extension" href=frequency.py> System Frequency |</a> ')
+	print str('<a class="menu-extension" href=soso_prints.py> SO-SO Prints |</a> ')
 	print "</div>"
 	print "</div>"
 
