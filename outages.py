@@ -107,13 +107,13 @@ for row in rows:
            str(row['AffectedUnit']),
            str(row['AssetId']),
            str(row['EventType']),
-           row['NormalCapacity'],
-           row['AvailableCapacity'],
+           row['NormalCap'],
+           row['AvailCap'],
            str(row['EventStatus']),
            str(row['EventStart']),
            str(row['EventEnd']),
            str(row['FuelType']),
-           str(row['Participant_MarketParticipantID'])
+           str(row['ParticipantID'])
 ))
 rows = d
 
