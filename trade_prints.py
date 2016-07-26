@@ -17,8 +17,8 @@ settlement	  = form.get('settlement', '')
 sql 	  = form.get('sql', '')
 
 session = 'REMIT'
-hanger.start('Trade Prints')
-hanger.h1('Trade Prints')
+hanger.start('IC Prices')
+hanger.h1('InterConnector Prices')
 form = '''
 <form class="form-inline container" method = "get" >
 <div class="form-group">
@@ -96,12 +96,12 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
-cols = ['Publication Time','Trade Price','Something','Interconnector','Settlement Time','Something Else','Quantity']
+cols = ['Publication Time','Offer Price','Side','Quantity','Offer ID','Settlement Time','Counterparty']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
-  d.append((str(row['pubTs']),row['PT'],row['TD'],row['IC'],row['ST'],row['TT'],row['TQ']))
+  d.append((str(row['pubTs']),row['PT'],row['TD'],row['TQ'],row['IC'],row['ST'],row['TT']))
 rows = d
 
 
