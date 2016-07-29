@@ -110,10 +110,8 @@ def bootstrap_table(rows, cols):
 
 	for row in rows: 
                 
-		if 'OPEN' in row:
-                    print "<tr class=danger>" 
-                elif 'FAILURE' in row:
-                    print "<tr class=info>"
+                if 'FAILURE' in row:
+                    print "<tr class=danger>"
 		else:
                     print "<tr>" 
 		for r in row:

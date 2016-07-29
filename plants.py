@@ -6,10 +6,10 @@ import hanger
 import MySQLdb as mdb
 form = cgi.SvFormContentDict()
 AssetType	  = form.get('AssetType', '')
-AffectedUnit 	  = form.get('AffectedUnit', '')
 AssetID 	  = form.get('AssetID', '')
 FuelType          = form.get('FuelType', '')
 AssetDescription  = form.get('AssetDescription','')
+name              = form.get('name', '')
 sql 	  = form.get('sql', '')
 
 session = 'config'
@@ -59,7 +59,7 @@ form = '''
 </form>
 '''
 print form
-query = 'select *  from outages'
+query = 'select *  from plants'
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -84,21 +84,16 @@ if sql:
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MessageHeading']
+cols = ['Name, AssetID, FuelType, NormalCapacity','CurrentCapacity']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
-  d.append(( str(row['AffectedUnit']),
+  d.append((str(row['name']), 
            str(row['AssetId']),
-           str(row['EventType']),
            row['NormalCapacity'],
            row['AvailableCapacity'],
-           str(row['EventStatus']),
-           str(row['EventStart']),
-           str(row['EventEnd']),
            str(row['FuelType']),
-           '<a href=outages.py?MessageHeading="REMIT Event ID 4168"> ' + str(row['MessageHeading'] + " </a>")
 ))
 rows = d
 
