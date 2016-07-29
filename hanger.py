@@ -9,23 +9,24 @@ host = 'localhost'
 
 def menu():
 	menu = ''
-	menu += str('<a href=trades.py> Trades </a>| ')
+	menu += str('<a href=trades.py>  Trades </a>| ')
 	menu += str('<a href=bootstrap_book.html> Book Viewer </a>| ')
 	menu += str('<a href=position.py> Position </a>| ')
 	menu += str('<a href=canvas.py> Live Charts </a>| ')
 	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
 	menu += str('<a href=REMIT > Messages </a>| ')
-	menu += str('<a class="extend-menu" > REMIT </a>| ')
-	print "<div class='row container' style='font-size:18px' >"
+	menu += str('<button class="btn btn-primary extend-menu">REMIT</button>' + ' | ')
+	print "<div class='col-md-2'>"
 	print "</div>"
-	print "<div class='col-md-12'>"
+	print "<div class='col-md-8'>"
 	print menu
-	print "</div>"
 	print "</div>"
 
 	print "<div class='row container' style='font-size:18px' >"
-	print "<div class='col-md-12'>"
+	print "<div class='col-md-2'>"
+	print "</div>"
+	print "<div class='col-md-8'>"
 	print str('<a class="menu-extension" href=frequency.py> System Frequency |</a> ')
 	print str('<a class="menu-extension" href=soso_prints.py> SO-SO Prints |</a> ')
 	print str('<a class="menu-extension" href=outages.py> Outages |</a> ')
@@ -56,7 +57,8 @@ def start(title):
 	print '    <![endif]-->'
 	print '  </head>'
 	print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'>"
-	print '  <body class="container">'
+#	print '  <body class="container">'
+	print '  <body>'
 	menu()
 
 def close():
@@ -106,11 +108,18 @@ def bootstrap_table(rows, cols):
 	print '</tr>'
 
 	for row in rows: 
-		print "<tr>"
+                
+		if 'OPEN' in row:
+                    print "<tr class=danger>" 
+                elif 'FAILURE' in row:
+                    print "<tr class=info>"
+		else:
+                    print "<tr>" 
 		for r in row:
 			print '<td>' + str(r) + '</td>'
 		print '</tr>'
 	print '</table>'
+	print '</div>'
 
 def table(rows, cols):
 # Idea of this function is to display a html table

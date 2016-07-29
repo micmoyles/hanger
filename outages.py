@@ -12,9 +12,13 @@ AffectedUnit 	  = form.get('AffectedUnit', '')
 AssetID 	  = form.get('AssetID', '')
 EventType         = form.get('EventType', '')
 FuelType          = form.get('FuelType', '')
+MessageHeading    = form.get('MessageHeading', '')
 sql 	  = form.get('sql', '')
 
 session = 'REMIT'
+db = mdb.connect( hanger.host, hanger.user, hanger.password )
+cursor = db.cursor(mdb.cursors.DictCursor)
+cursor.execute( "use %s" % session )
 hanger.start('Outages')
 hanger.h1('Outages')
 form = '''
@@ -73,17 +77,16 @@ if EventType:
   query = extendQuery(query,"EventType = '%s' " % str(EventType) )
 if AssetID: 
   query = extendQuery(query,"AssetID = '%s' " % str(AssetID))
+if MessageHeading: 
+  query = extendQuery(query,"MessageHeading = %s " % str(MessageHeading))
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
 
-db = mdb.connect( hanger.host, hanger.user, hanger.password )
-cursor = db.cursor(mdb.cursors.DictCursor)
-cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MH']
+cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MessageHeading']
 rows = cursor.fetchall()
 cursor.close()
 d = []
@@ -97,7 +100,7 @@ for row in rows:
            str(row['EventStart']),
            str(row['EventEnd']),
            str(row['FuelType']),
-           str(row['MessageHeading'])
+           '<a href=outages.py?MessageHeading="REMIT Event ID 4168"> ' + str(row['MessageHeading'] + " </a>")
 ))
 rows = d
 
