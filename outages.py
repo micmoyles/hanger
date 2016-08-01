@@ -5,6 +5,7 @@ import sys
 import hanger
 import MySQLdb as mdb
 import datetime
+import log
 #form = cgi.FieldStorage()
 form = cgi.SvFormContentDict()
 EventStatus	  = form.get('EventStatus', '')
@@ -14,11 +15,10 @@ AssetID 	  = form.get('AssetID', '')
 EventType         = form.get('EventType', '')
 FuelType          = form.get('FuelType', '')
 showForm          = form.get('showForm', '')
-MessageHeading    = form.get('MessageHeading', '')
+rangeInDays       = form.get('rangeInDays', '')
 sql 	  = form.get('sql', '')
 
 session = 'REMIT'
-rangeInDays = 2
 db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
@@ -60,6 +60,10 @@ form = '''
         <label for="exampleInputName2">Fuel Type</label>
         <input type="text" name="FuelType" class="form-control" id="exampleInputName2">
         </td>
+        <td>
+        <label for="exampleInputName2">Range (Days)</label>
+        <input type="text" name="rangeInDays" class="form-control" id="exampleInputName2">
+        </td>
         </tr>
     </tbody>
 </table>
@@ -70,12 +74,22 @@ form = '''
 '''
 if showForm: print form
 now = datetime.datetime.now().strftime( '%Y-%m-%d %H:%m:%S')
+log.info(rangeInDays)
+if not rangeInDays: 
+   rangeInDays=2
+else:
+   rangeInDays = int(rangeInDays)
 t1 = (datetime.datetime.now() - datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%m:%S') 
 t2 = (datetime.datetime.now() + datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%m:%S') 
 if not showForm: 
-   query = "select EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity  from outages where EventStart < ' %s ' and EventEnd > ' %s ' and EventStatus = 'OPEN'" % ( now, now) 
+   query = '''
+	select EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages 
+	where EventStart < ' %s '
+	 and EventEnd > ' %s ' 
+	and EventStatus = 'OPEN' 
+''' % ( now, now) 
 else:
-   query = "select * from outages where EventStart > '%s' and EventEnd < '%s'" % ( t1, t2) 
+   query = "select EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages where EventStart > '%s' and EventEnd < '%s'" % ( t1, t2) 
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -91,10 +105,8 @@ if EventType:
   query = extendQuery(query,"EventType = '%s' " % str(EventType) )
 if AssetID: 
   query = extendQuery(query,"AssetID = '%s' " % str(AssetID))
-if MessageHeading: 
-  query = extendQuery(query,"MessageHeading = %s " % str(MessageHeading))
 hanger.showquery(query)
-if any((EventStatus,AffectedUnit,EventType,AssetID,MessageHeading)): showForm = True
+if any((EventStatus,AffectedUnit,EventType,AssetID,rangeInDays)): showForm = True
 
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
@@ -108,7 +120,7 @@ for row in rows:
   d.append(( 
            str(row['EventStart']),
            str(row['EventEnd']),
-           str(row['AssetId']),
+           "<a href=plants.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
            str(row['EventType']),
            row['NormalCapacity'],
            row['AvailableCapacity'],

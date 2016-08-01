@@ -8,16 +8,20 @@ form = cgi.SvFormContentDict()
 AssetType	  = form.get('AssetType', '')
 AssetID 	  = form.get('AssetID', '')
 FuelType          = form.get('FuelType', '')
-AssetDescription  = form.get('AssetDescription','')
 Name              = form.get('Name', '')
+AssetDescription  = form.get('AssetDescription','')
 sql 	  = form.get('sql', '')
+add_NormalCapacity	  = form.get('add_NormalCapacity', '')
+add_AssetID 	  = form.get('add_AssetID', '')
+add_FuelType          = form.get('add_FuelType', '')
+add_Name              = form.get('add_Name', '')
 
 session = 'config'
 db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 hanger.start('Plant Config')
-hanger.h1('Plant Config')
+hanger.h2('Plant Config')
 form = '''
 <form class="form-inline container" method = "get" >
 <div class="form-group">
@@ -33,10 +37,6 @@ form = '''
         <input type="text" name="AssetType" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">Asset Description</label>
-        <input type="text" name="AssetDescription" class="form-control" id="exampleInputName2">
-        </td>
-        <td>
         <label for="exampleInputName2">Asset ID</label>
         <input type="text" name="AssetID" class="form-control" id="exampleInputName2">
         </td>
@@ -47,13 +47,22 @@ form = '''
     </tbody>
 </table>
 <button type="Query" class="btn btn-default">Query</button>
-<button type="Add" class="btn btn-default">Add</button>
 <button type="button" class="btn btn-info">Show Query</button>
 </div>
 </form>
 '''
 print form
-query = 'select Name,AssetID,FuelType,NormalCapacity  from Plants'
+query = '''
+	select p.Name as Name, 
+	p.AssetID as AssetID,
+	p.FuelType as FuelType,
+	p.NormalCapacity as NormCap, 
+	ps.Status as Status,
+	ps.CurrentCapacity as AvailCap
+	from Plants p
+	inner join plant_status ps on ps.AssetID = p.AssetID
+'''
+
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -62,34 +71,73 @@ def extendQuery(query,text):
   return query
 
 if Name: 
-  query = extendQuery(query,"Name = %d " % str(Name) )
+  query = extendQuery(query,"p.Name = '%s' " % str(Name) )
 if AssetDescription: 
-  query = extendQuery(query,"AssetDescription = %f " % str(AssetDescription) )
+  query = extendQuery(query,"p.AssetDescription = '%s' " % str(AssetDescription) )
 if AssetType: 
-  query = extendQuery(query,"AssetType = '%s' " % str(AssetType) )
+  query = extendQuery(query,"p.AssetType = '%s' " % str(AssetType) )
 if AssetID: 
-  query = extendQuery(query,"AssetID = '%s' " % str(AssetID))
+  query = extendQuery(query,"p.AssetID = '%s' " % str(AssetID))
 if FuelType: 
-  query = extendQuery(query,"FuelType = %s " % str(FuelType))
+  query = extendQuery(query,"p.FuelType = '%s' " % str(FuelType))
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
 
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
-#cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['Name, AssetID, FuelType, NormalCapacity']
+cols = ['Name', 'AssetID', 'FuelType', 'Status', 'NormalCapacity','CurrentCapacity']
 rows = cursor.fetchall()
-cursor.close()
 d = []
 for row in rows:
   d.append((str(row['Name']), 
            str(row['AssetID']),
-           row['NormalCapacity'],
            str(row['FuelType']),
+           str(row['Status']),
+           row['NormCap'],
+           row['AvailCap'],
 ))
 rows = d
-
-
 hanger.bootstrap_table(rows,cols)
+
+hanger.h2('Add Plant')
+
+form = '''
+<form class="form-inline container" method = "get" >
+<div class="form-group">
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+        <td>
+        <label for="exampleInputName2">Name</label>
+        <input type="text" name="add_Name" class="form-control" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Asset ID</label>
+        <input type="text" name="add_AssetID" class="form-control" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Fuel Type</label>
+        <input type="text" name="add_FuelType" class="form-control" id="exampleInputName2">
+        </td>
+        <td>
+        <label for="exampleInputName2">Normal Capacity</label>
+        <input type="text" name="add_NormalCapacity" class="form-control" id="exampleInputName2">
+        </td>
+    </tbody>
+</table>
+<button type="addPlant" class="btn btn-default">Add Plant</button>
+<button type="button" class="btn btn-info">Show Query</button>
+</div>
+</form>
+'''
+print form
+if add_Name and add_AssetID and add_FuelType and add_NormalCapacity:
+   insert_query = "insert into Plants values ( '%s', '%s', '%s', %d )" % ( str(add_Name), str(add_AssetID), str(add_FuelType), float(add_NormalCapacity))
+   cursor.execute(insert_query)
+   db.commit()
+else:
+   insert_query = 'Missing Values so query is null'
+hanger.showquery(insert_query)
+cursor.close()
 hanger.close()
