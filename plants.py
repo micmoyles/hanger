@@ -53,7 +53,7 @@ form = '''
 </form>
 '''
 print form
-query = 'select *  from Plants'
+query = 'select Name,AssetID,FuelType,NormalCapacity  from Plants'
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -78,15 +78,14 @@ if sql:
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-cols = ['Name, AssetID, FuelType, NormalCapacity','CurrentCapacity']
+cols = ['Name, AssetID, FuelType, NormalCapacity']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
-  d.append((str(row['name']), 
+  d.append((str(row['Name']), 
            str(row['AssetID']),
            row['NormalCapacity'],
-           row['CurrentCapacity'],
            str(row['FuelType']),
 ))
 rows = d
