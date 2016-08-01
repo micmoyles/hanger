@@ -91,9 +91,9 @@ def showquery(text):
 	# print html paragraph
 	print '''
               <div class="container">
-              <code class="sql">' + str(text) + '</code>'
-               </div>
-		'''
+              <code class="sql"> + str(text) + </code>
+              </div>
+	'''
 
 def bootstrap_table(rows, cols):
 # Idea of this function is to display a html table
