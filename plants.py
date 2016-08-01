@@ -9,7 +9,7 @@ AssetType	  = form.get('AssetType', '')
 AssetID 	  = form.get('AssetID', '')
 FuelType          = form.get('FuelType', '')
 AssetDescription  = form.get('AssetDescription','')
-name              = form.get('name', '')
+Name              = form.get('Name', '')
 sql 	  = form.get('sql', '')
 
 session = 'config'
@@ -25,31 +25,25 @@ form = '''
     <tbody>
         <tr>
         <td>
-        <label for="exampleInputName2">Event Status</label>
-        <input type="text" name="EventStatus" class="form-control" id="exampleInputName2">
+        <label for="exampleInputName2">Name</label>
+        <input type="text" name="Name" class="form-control" id="exampleInputName2">
         </td>
         <td>
         <label for="exampleInputName2">Asset Type</label>
         <input type="text" name="AssetType" class="form-control" id="exampleInputName2">
         </td>
         <td>
-        <label for="exampleInputName2">Affected Unit</label>
-        <input type="text" name="AffectedUnit" class="form-control" id="exampleInputName2">
+        <label for="exampleInputName2">Asset Description</label>
+        <input type="text" name="AssetDescription" class="form-control" id="exampleInputName2">
         </td>
         <td>
         <label for="exampleInputName2">Asset ID</label>
         <input type="text" name="AssetID" class="form-control" id="exampleInputName2">
         </td>
-        <tr>
-        <td>
-        <label for="exampleInputName2">Event Type</label>
-        <input type="text" name="EventType" class="form-control" id="exampleInputName2">
-        </td>
         <td>
         <label for="exampleInputName2">Fuel Type</label>
         <input type="text" name="FuelType" class="form-control" id="exampleInputName2">
         </td>
-        </tr>
     </tbody>
 </table>
 <button type="Query" class="btn btn-default">Query</button>
@@ -59,7 +53,7 @@ form = '''
 </form>
 '''
 print form
-query = 'select *  from plants'
+query = 'select *  from Plants'
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -67,16 +61,16 @@ def extendQuery(query,text):
     query+=' where '+text
   return query
 
-if EventStatus: 
-  query = extendQuery(query,"EventStatus = %d " % str(EventStatus) )
-if AffectedUnit: 
-  query = extendQuery(query,"AffectedUnit = %f " % str(AffectedUnit) )
-if EventType: 
-  query = extendQuery(query,"EventType = '%s' " % str(EventType) )
+if Name: 
+  query = extendQuery(query,"Name = %d " % str(Name) )
+if AssetDescription: 
+  query = extendQuery(query,"AssetDescription = %f " % str(AssetDescription) )
+if AssetType: 
+  query = extendQuery(query,"AssetType = '%s' " % str(AssetType) )
 if AssetID: 
   query = extendQuery(query,"AssetID = '%s' " % str(AssetID))
-if MessageHeading: 
-  query = extendQuery(query,"MessageHeading = %s " % str(MessageHeading))
+if FuelType: 
+  query = extendQuery(query,"FuelType = %s " % str(FuelType))
 hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
@@ -90,9 +84,9 @@ cursor.close()
 d = []
 for row in rows:
   d.append((str(row['name']), 
-           str(row['AssetId']),
+           str(row['AssetID']),
            row['NormalCapacity'],
-           row['AvailableCapacity'],
+           row['CurrentCapacity'],
            str(row['FuelType']),
 ))
 rows = d
