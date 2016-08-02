@@ -47,7 +47,8 @@ form = '''
     </tbody>
 </table>
 <button type="Query" class="btn btn-default">Query</button>
-<button type="button" class="btn btn-info">Show Query</button>
+<button type="button" class="btn btn-sql btn-info">Show Query</button>
+<button type="button" class="btn btn-info btn-addPlant">Add Plant</button>
 </div>
 </form>
 '''
@@ -100,7 +101,6 @@ for row in rows:
 rows = d
 hanger.bootstrap_table(rows,cols)
 
-hanger.h2('Add Plant')
 
 form = '''
 <form class="form-inline container" method = "get" >
@@ -131,13 +131,18 @@ form = '''
 </div>
 </form>
 '''
+print "<div class='addPlant'>"
+hanger.h3('Add Plant')
 print form
 if add_Name and add_AssetID and add_FuelType and add_NormalCapacity:
    insert_query = "insert into Plants values ( '%s', '%s', '%s', %d )" % ( str(add_Name), str(add_AssetID), str(add_FuelType), float(add_NormalCapacity))
+   cursor.execute(insert_query)
+   insert_query = "insert into plant_status values ( '%s', '%s', %d, %d )" % ( str(add_AssetID), str(add_FuelType), float(add_NormalCapacity), float(add_NormalCapacity))
    cursor.execute(insert_query)
    db.commit()
 else:
    insert_query = 'Missing Values so query is null'
 hanger.showquery(insert_query)
+print '</div>'
 cursor.close()
 hanger.close()
