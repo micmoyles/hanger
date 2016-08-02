@@ -12,6 +12,7 @@ Name              = form.get('Name', '')
 AssetDescription  = form.get('AssetDescription','')
 sql 	  = form.get('sql', '')
 add_NormalCapacity	  = form.get('add_NormalCapacity', '')
+add_AvailableCapacity	  = form.get('add_AvailableCapacity', '')
 add_AssetID 	  = form.get('add_AssetID', '')
 add_FuelType          = form.get('add_FuelType', '')
 add_Name              = form.get('add_Name', '')
@@ -124,6 +125,10 @@ form = '''
         <label for="exampleInputName2">Normal Capacity</label>
         <input type="text" name="add_NormalCapacity" class="form-control" id="exampleInputName2">
         </td>
+        <td>
+        <label for="exampleInputName2">Available Capacity</label>
+        <input type="text" name="add_AvailableCapacity" class="form-control" id="exampleInputName2">
+        </td>
     </tbody>
 </table>
 <button type="addPlant" class="btn btn-default">Add Plant</button>
@@ -135,9 +140,11 @@ print "<div class='addPlant'>"
 hanger.h3('Add Plant')
 print form
 if add_Name and add_AssetID and add_FuelType and add_NormalCapacity:
+   if not add_AvailableCapacity:
+       add_AvailableCapacity = add_NormalCapacity
    insert_query = "insert into Plants values ( '%s', '%s', '%s', %d )" % ( str(add_Name), str(add_AssetID), str(add_FuelType), float(add_NormalCapacity))
    cursor.execute(insert_query)
-   insert_query = "insert into plant_status values ( '%s', '%s', %d, %d )" % ( str(add_AssetID), str(add_FuelType), float(add_NormalCapacity), float(add_NormalCapacity))
+   insert_query = "insert into plant_status values ( '%s', '%s', %d, %d )" % ( str(add_AssetID), 'OPEN' , float(add_NormalCapacity), float(add_AvailableCapacity))
    cursor.execute(insert_query)
    db.commit()
 else:

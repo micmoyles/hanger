@@ -83,13 +83,13 @@ t1 = (datetime.datetime.now() - datetime.timedelta(days=rangeInDays)).strftime( 
 t2 = (datetime.datetime.now() + datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%m:%S') 
 if not showForm: 
    query = '''
-	select EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages 
+	select messageCreationTs as ts,EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages 
 	where EventStart < ' %s '
 	 and EventEnd > ' %s ' 
 	and EventStatus = 'OPEN' 
 ''' % ( now, now) 
 else:
-   query = "select EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages where EventStart > '%s' and EventEnd < '%s'" % ( t1, t2) 
+   query = "select messageCreationTs as ts,EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages where EventStart > '%s' and EventEnd < '%s'" % ( t1, t2) 
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -112,12 +112,13 @@ cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 #cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
 #cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MessageHeading']
-cols = ['EventStart','EventEnd','AssetID','EventType','NormCap','AvailCap']
+cols = ['messageTs','EventStart','EventEnd','AssetID','EventType','NormCap','AvailCap']
 rows = cursor.fetchall()
 cursor.close()
 d = []
 for row in rows:
   d.append(( 
+           str(row['ts']),
            str(row['EventStart']),
            str(row['EventEnd']),
            "<a href=plants.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
