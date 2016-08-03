@@ -61,7 +61,7 @@ query = '''
 	p.NormalCapacity as NormCap, 
 	ps.Status as Status,
 	ps.CurrentCapacity as AvailCap
-	from Plants p
+	from plants p
 	inner join plant_status ps on ps.AssetID = p.AssetID
 '''
 
@@ -142,7 +142,7 @@ print form
 if add_Name and add_AssetID and add_FuelType and add_NormalCapacity:
    if not add_AvailableCapacity:
        add_AvailableCapacity = add_NormalCapacity
-   insert_query = "insert into Plants values ( '%s', '%s', '%s', %d )" % ( str(add_Name), str(add_AssetID), str(add_FuelType), float(add_NormalCapacity))
+   insert_query = "insert into plants (name,AssetID,FuelType,NormalCapacity) values ( '%s', '%s', '%s', %d )" % ( str(add_Name), str(add_AssetID), str(add_FuelType), float(add_NormalCapacity))
    cursor.execute(insert_query)
    insert_query = "insert into plant_status values ( '%s', '%s', %d, %d )" % ( str(add_AssetID), 'OPEN' , float(add_NormalCapacity), float(add_AvailableCapacity))
    cursor.execute(insert_query)
