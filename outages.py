@@ -79,8 +79,8 @@ if not rangeInDays:
    rangeInDays=2
 else:
    rangeInDays = int(rangeInDays)
-t1 = (datetime.datetime.now() - datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%m:%S') 
-t2 = (datetime.datetime.now() + datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%m:%S') 
+t1 = (datetime.datetime.now() - datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%M:%S') 
+t2 = (datetime.datetime.now() + datetime.timedelta(days=rangeInDays)).strftime( '%Y-%m-%d %H:%M:%S') 
 if not showForm: 
    query = '''
 	select messageCreationTs as ts,EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from outages 
