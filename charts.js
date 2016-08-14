@@ -1,5 +1,6 @@
 window.onload = function () {
 	var dps = [{x: 1, y: 10}, {x: 2, y: 10}, {x: 3, y: 10}, {x: 4, y: 10}, {x: 5, y: 10}];   //dataPoints. 
+	var dps = []
 	var dps2 = [{x: 1, y: 11}, {x: 2, y: 11}, {x: 3, y: 11}, {x: 4, y: 11}, {x: 5, y: 11}];   //dataPoints. 
  
 var chart = new CanvasJS.Chart("chartContainer",{
@@ -15,15 +16,13 @@ var chart = new CanvasJS.Chart("chartContainer",{
 	data: [{
 		type: "line",
 		dataPoints : dps
-	},
-	{type: "line",
-	 dataPoints: dps2
 	 }]
 });
 chart.render();
 
 
     var xVal = dps.length + 1;
+    var xVal = 1;
     var yVal = 100;	
     var updateInterval = 1000;
      
@@ -33,21 +32,34 @@ chart.render();
     $('.btn-resume').click(function () {
 	setInterval(function(){updateChart()}, updateInterval);
     });
-    var updateChart = function () {
+//    var updateChart = function () {
+            $.getJSON("production.json", function (data) {
+
+                for (var i = 0; i < data.length; i++) {
+                                    
+                    dps.push({ x: i, y: data[i].capacity });
+                //    dps.push({ x: i, y: i+10 });
+                }
+
+                chart.options.data[0].dps = dps;
+                chart.render();
+            });
+//};
+
     	
     	
-    		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-    		y2Val = yVal - 10;
-    		dps.push({x: xVal,y: yVal,});
-    		dps2.push({x: xVal,y: y2Val,});
+//    		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+ //   		y2Val = yVal - 10;
+  //  		dps.push({x: xVal,y: yVal,});
+   // 		dps2.push({x: xVal,y: y2Val,});
     		
     		
-    		xVal++;
+    //		xVal++;
     	
-    	chart.render();		
-};	
+    //	chart.render();		
+//};	
     	// update chart after specified time. 
-    var interval = setInterval(function(){updateChart()}, updateInterval); 
+ //   var interval = setInterval(function(){updateChart()}, updateInterval); 
     
     var doughnutChart = new CanvasJS.Chart("doughnutChartContainer",
     {
