@@ -1,7 +1,7 @@
 window.onload = function () {
-	var dps = [{x: 1, y: 10}, {x: 2, y: 10}, {x: 3, y: 10}, {x: 4, y: 10}, {x: 5, y: 10}];   //dataPoints. 
+//	var dps = [{x: 1, y: 10}, {x: 2, y: 10}, {x: 3, y: 10}, {x: 4, y: 10}, {x: 5, y: 10}];   //dataPoints. 
 	var dps = []
-	var dps2 = [{x: 1, y: 11}, {x: 2, y: 11}, {x: 3, y: 11}, {x: 4, y: 11}, {x: 5, y: 11}];   //dataPoints. 
+//	var dps2 = [{x: 1, y: 11}, {x: 2, y: 11}, {x: 3, y: 11}, {x: 4, y: 11}, {x: 5, y: 11}];   //dataPoints. 
  
 var chart = new CanvasJS.Chart("chartContainer",{
 	title :{
