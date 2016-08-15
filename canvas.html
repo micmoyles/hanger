@@ -1,11 +1,50 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<meta charset="utf-8">'
+<meta http-equiv="X-UA-Compatible" content="IE=edge">'
+<meta name="viewport" content="width=device-width, initial-scale=1">'
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->'
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+ $(document).ready( function () {
+        var dps = [];
+
+ var chart = new CanvasJS.Chart("plantProduction",{
+        title :{
+                text: "Historical Book"
+        },
+        axisX: {
+                title: "Time"
+        },
+        axisY: {
+                title: "GBP"
+        },
+        data: [{
+                type: "line",
+                dataPoints : dps
+         }]
+ });
+ chart.render();
+
+ $.getJSON("DRAXX-1.json", function (data) {
+
+    for (var i = 0; i < data.length; i++) {
+
+      dps.push({ x: i, y: data[i].capacity });
+                }
+
+    chart.options.data[0].dps = dps;
+    chart.render();
+            });
+});
+</script>
 
 </head>
 <body>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="plantProduction" style="height: 300px; width: 100%;"></div>
 </br>
 <div id="doughnutChartContainer" style="height: 300px; width: 100%;"></div>
 
