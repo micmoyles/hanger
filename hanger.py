@@ -45,6 +45,7 @@ def start(title):
 	print '    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->'
 	print '    <title> %s </title>' % str(title)
 	print ''
+	print '     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>'
 	print '    <!-- Bootstrap -->'
 	print '    <link href="css/bootstrap.min.css" rel="stylesheet">'
 	print '    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>'
@@ -71,7 +72,6 @@ def close():
 		   <script src="app.js"></script>
     		   <script src="book.js"></script>
                    <script src="sortable.js"></script>
-	 	  <script src="charts.js"></script>
 	   </body>
 	  </html>
 	'''

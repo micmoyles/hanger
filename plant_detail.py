@@ -9,10 +9,9 @@ AssetID 	  = form.get('AssetID', '')
 FuelType          = form.get('FuelType', '')
 Name              = form.get('Name', '')
 script = '''
-<script type="text/javascript" src="CanvasJS.js"></script>
-<script type="text/javascript>
+<script type="text/javascript">
 $(document).ready( function () {
-        var dps = []
+        var dps = [];
 
 var chart = new CanvasJS.Chart("plantProduction",{
         title :{
