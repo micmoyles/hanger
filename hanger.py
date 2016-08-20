@@ -2,9 +2,9 @@
 
 #script to hold common hanger functions
 
-user = 'root'
-password = 'wiarreft'
-host = 'localhost'
+user = 'reader'
+password = '1canR3ad'
+host = '54.194.208.88'
 
 
 def menu():
@@ -16,7 +16,8 @@ def menu():
 	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
 	menu += str('<a href=loader.py> Loader </a>| ')
 	menu += str('<a href=REMIT > Messages </a>| ')
-	menu += str('<button class="btn btn-primary extend-menu">REMIT</button>' + ' | ')
+	menu += str('<a class="extend-menu" > REMIT </a>| ')
+#	menu += str('<button class="btn btn-primary extend-menu">REMIT</button>' + ' | ')
 	print "<div class='col-md-2'>"
 	print "</div>"
 	print "<div class='col-md-8'>"

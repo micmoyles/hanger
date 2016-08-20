@@ -121,7 +121,7 @@ for row in rows:
            str(row['ts']),
            str(row['EventStart']),
            str(row['EventEnd']),
-           "<a href=plants.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
+           "<a href=plant_detail.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
            str(row['EventType']),
            row['NormalCapacity'],
            row['AvailableCapacity'],

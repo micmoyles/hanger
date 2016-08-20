@@ -8,6 +8,7 @@ form = cgi.SvFormContentDict()
 AssetID 	  = form.get('AssetID', '')
 FuelType          = form.get('FuelType', '')
 Name              = form.get('Name', '')
+jsonData = '%s' % AssetID.upper()
 script = '''
 <script type="text/javascript">
 $(document).ready( function () {
@@ -30,7 +31,7 @@ var chart = new CanvasJS.Chart("plantProduction",{
 });
 chart.render();
 
-$.getJSON("%s.json", function (data) {
+$.getJSON("/json/%s.json", function (data) {
 
     for (var i = 0; i < data.length; i++) {
 
@@ -42,7 +43,7 @@ $.getJSON("%s.json", function (data) {
             });
 });
 </script>
-''' % AssetID.upper()
+''' % jsonData 
 db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 hanger.start('Plant %s' % AssetID)
