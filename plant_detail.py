@@ -31,7 +31,7 @@ var chart = new CanvasJS.Chart("plantProduction",{
 });
 chart.render();
 
-$.getJSON("/json/%s.json", function (data) {
+$.getJSON("/plant_data/%s.json", function (data) {
 
     for (var i = 0; i < data.length; i++) {
 
@@ -48,6 +48,7 @@ db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 hanger.start('Plant %s' % AssetID)
 hanger.h2('Plant Details - %s' % AssetID)
+hanger.h3('<a href=plant_detail.py?AssetID=TOTAL> Show Total Capacity </a>')
 query = '''
 	select p.Name as Name, 
 	p.AssetID as AssetID,

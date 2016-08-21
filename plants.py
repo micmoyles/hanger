@@ -93,7 +93,7 @@ rows = cursor.fetchall()
 d = []
 for row in rows:
   d.append((str(row['Name']), 
-           str(row['AssetID']),
+            "<a href=plant_detail.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ),
            str(row['FuelType']),
            str(row['Status']),
            row['NormCap'],
