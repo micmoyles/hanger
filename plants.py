@@ -100,7 +100,6 @@ for row in rows:
            row['AvailCap'],
 ))
 rows = d
-hanger.bootstrap_table(rows,cols)
 
 
 form = '''
@@ -151,5 +150,6 @@ else:
    insert_query = 'Missing Values so query is null'
 hanger.showquery(insert_query)
 print '</div>'
+hanger.bootstrap_table(rows,cols)
 cursor.close()
 hanger.close()
