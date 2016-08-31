@@ -9,14 +9,14 @@ host = '54.194.208.88'
 
 def menu():
 	menu = ''
-	menu += str('<a href=trades.py>  Trades </a>| ')
-	menu += str('<a href=bootstrap_book.html> Book Viewer </a>| ')
-	menu += str('<a href=position.py> Position </a>| ')
-	menu += str('<a href=canvas.py> Live Charts </a>| ')
-	menu += str('<a href=charts.html> Trade Reconciliation </a>| ')
-	menu += str('<a href=loader.py> Loader </a>| ')
-	menu += str('<a href=REMIT > Messages </a>| ')
-	menu += str('<a class="extend-menu" > REMIT </a>| ')
+	menu += str('<a href=trades.py><button type="button" class="btn btn-default btn-small">  Trades </button> </a> ')
+	menu += str('<a href=bootstrap_book.html> <button type="button" class="btn btn-default btn-small"> Book Viewer </button></a> ')
+	menu += str('<a href=position.py> <button type="button" class="btn btn-default btn-small">Position </button></a> ')
+	menu += str('<a href=canvas.py> <button type="button" class="btn btn-default btn-small">Live Charts </button></a> ')
+	menu += str('<a href=charts.html> <button type="button" class="btn btn-default btn-small"> Trade Reconciliation</button> </a> ')
+	menu += str('<a href=loader.py> <button type="button" class="btn btn-default btn-small"> Loader</button> </a> ')
+	menu += str('<a href=REMIT > <button type="button" class="btn btn-default btn-small"> Messages</button> </a> ')
+	menu += str('<a class="extend-menu" > <button type="button" class="btn btn-default btn-small"> REMIT </button></a> ')
 #	menu += str('<button class="btn btn-primary extend-menu">REMIT</button>' + ' | ')
 	print "<div class='col-md-2'>"
 	print "</div>"
@@ -28,14 +28,14 @@ def menu():
 	print "<div class='col-md-2'>"
 	print "</div>"
 	print "<div class='col-md-8'>"
-	print str('<a class="menu-extension" href=frequency.py> System Frequency |</a> ')
-	print str('<a class="menu-extension" href=soso_prints.py> SO-SO Prints |</a> ')
-	print str('<a class="menu-extension" href=outages.py> Outages |</a> ')
-	print str('<a class="menu-extension" href=plants.py> Plant Config |</a> ')
+	print str('<a class="menu-extension" href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
+	print str('<a class="menu-extension" href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
+	print str('<a class="menu-extension" href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
+	print str('<a class="menu-extension" href=plants.py>  <button type="button" class="btn btn-default btn-small"> Plant Config </button></a> ')
 	print "</div>"
 	print "</div>"
 
-def start(title):
+def start(title, showMenu=True ):
 	print 'Content-Type: text-html'
 	print '\n' # new line needed to identify html header
 	print '<html>'
@@ -59,10 +59,10 @@ def start(title):
 	print '      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>'
 	print '    <![endif]-->'
 	print '  </head>'
-	print "<img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'>"
+	print "<a href=index.py> <img src='EE.jpg'class='img-responsive' alt='Responsive image' style='height:100px;width:100px'></a>"
 #	print '  <body class="container">'
 	print '  <body>'
-	menu()
+	if showMenu: menu()
 
 def close():
 	print '''
@@ -71,7 +71,7 @@ def close():
 	     <!-- Include all compiled plugins (below), or include individual files as needed -->
 	     <script src="js/bootstrap.min.js"></script>
 		   <script src="app.js"></script>
-    		   <script src="book.js"></script>
+    		   <!--<script src="book.js"></script>-->
                    <script src="sortable.js"></script>
 	   </body>
 	  </html>
