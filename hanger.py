@@ -10,14 +10,14 @@ host = '54.194.208.88'
 def menu():
 	menu = ''
 	menu += str('<a href=trades.py><button type="button" class="btn btn-default btn-small">  Trades </button> </a> ')
-	menu += str('<a href=bootstrap_book.html> <button type="button" class="btn btn-default btn-small"> Book Viewer </button></a> ')
 	menu += str('<a href=position.py> <button type="button" class="btn btn-default btn-small">Position </button></a> ')
 	menu += str('<a href=canvas.py> <button type="button" class="btn btn-default btn-small">Live Charts </button></a> ')
-	menu += str('<a href=charts.html> <button type="button" class="btn btn-default btn-small"> Trade Reconciliation</button> </a> ')
-	menu += str('<a href=loader.py> <button type="button" class="btn btn-default btn-small"> Loader</button> </a> ')
 	menu += str('<a href=REMIT > <button type="button" class="btn btn-default btn-small"> Messages</button> </a> ')
-	menu += str('<a class="extend-menu" > <button type="button" class="btn btn-default btn-small"> REMIT </button></a> ')
-#	menu += str('<button class="btn btn-primary extend-menu">REMIT</button>' + ' | ')
+	menu += str('<a href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
+	menu += str('<a href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
+	menu += str('<a href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
+	menu += str('<a href=plants.py>  <button type="button" class="btn btn-default btn-small"> Plant Config </button></a> ')
+	menu += str('<a class="extend-menu" > <button type="button" class="btn btn-default btn-small"> Extra </button></a> ')
 	print "<div class='col-md-2'>"
 	print "</div>"
 	print "<div class='col-md-8'>"
@@ -27,11 +27,10 @@ def menu():
 	print "<div class='row container' style='font-size:18px' >"
 	print "<div class='col-md-2'>"
 	print "</div>"
-	print "<div class='col-md-8'>"
-	print str('<a class="menu-extension" href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
-	print str('<a class="menu-extension" href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
-	print str('<a class="menu-extension" href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
-	print str('<a class="menu-extension" href=plants.py>  <button type="button" class="btn btn-default btn-small"> Plant Config </button></a> ')
+	print "<div class='col-md-8 menu-extension'>"
+	print str('<a href=bootstrap_book.html> <button type="button" class="btn btn-default btn-small"> Book Viewer </button></a> ')
+	print str('<a href=charts.html> <button type="button" class="btn btn-default btn-small"> Trade Reconciliation</button> </a> ')
+	print str('<a href=loader.py> <button type="button" class="btn btn-default btn-small"> Loader</button> </a> ')
 	print "</div>"
 	print "</div>"
 
