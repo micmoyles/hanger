@@ -17,6 +17,41 @@ FuelType          = form.get('FuelType', '')
 showForm          = form.get('showForm', '')
 rangeInDays       = form.get('rangeInDays', '')
 sql 	  = form.get('sql', '')
+script = '''
+<script type="text/javascript">
+$(document).ready( function () {
+        var dps = [];
+
+var chart = new CanvasJS.Chart("plantProduction",{
+        title :
+                text: "Upcoming Production Profile"
+        },
+        axisX: {
+                title: "Time"
+        },
+        axisY: {
+                title: "GBP"
+        },
+        data: [{
+                type: "line",
+                dataPoints : dps
+         }]
+});
+chart.render();
+
+$.getJSON("/plant_data/TOTAL.json", function (data) {
+
+    for (var i = 0; i < data.length; i++) {
+
+      dps.push({ x: i, y: data[i].capacity });
+                }
+
+    chart.options.data[0].dps = dps;
+    chart.render();
+            });
+});
+</script>
+'''
 
 session = 'REMIT'
 db = mdb.connect( hanger.host, hanger.user, hanger.password )
@@ -24,6 +59,7 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 hanger.start('REMIT Events')
 hanger.h2('Current REMIT Events')
+print('<div id="plantProduction" style="height: 300px; width: 100%;"></div>')
 viewAll = '''
 <div class=container>
 <a href=outages.py?showForm=True>View all events here<a>
@@ -131,4 +167,5 @@ rows = d
 
 hanger.bootstrap_table(rows,cols)
 print viewAll
+print script
 hanger.close()
