@@ -15,10 +15,6 @@ venue     = form.get('venue', '')
 counterparty	  = form.get('counterparty', '')
 sql 	  = form.get('sql', '')
 
-host = 'localhost'
-user = 'root'
-passwd = 'wiarreft'
-session = '20150602A'
 hanger.start('Trades')
 hanger.h1('Trades')
 form = '''
@@ -65,7 +61,7 @@ form = '''
 </form>
 '''
 print form
-query = 'select * from trades'
+query = 'select * from trades.trades'
 def extendQuery(query,text):
   if 'where' in query:
     query+=' and '+text
@@ -85,9 +81,8 @@ hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
 
-db = mdb.connect( host, user, passwd )
+db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
-cursor.execute( "use %s" % session )
 cursor.execute(query)
 cols = map(lambda x: x[0], cursor.description) 
 rows = cursor.fetchall()

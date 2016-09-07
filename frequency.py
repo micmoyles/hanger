@@ -15,9 +15,6 @@ venue     = form.get('venue', '')
 counterparty	  = form.get('counterparty', '')
 sql 	  = form.get('sql', '')
 
-host = 'localhost'
-user = 'root'
-passwd = 'wiarreft'
 session = 'REMIT'
 hanger.start('System Frequency')
 hanger.h1('System Frequency')
@@ -27,7 +24,7 @@ hanger.showquery(query)
 if sql: 
   hanger.showquery(query)
 
-db = mdb.connect( host, user, passwd )
+db = mdb.connect( hanger.host, hanger.user, hanger.password )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 cursor.execute(query)
@@ -42,5 +39,4 @@ for row in rows:
 rows = d
 
 hanger.bootstrap_table(rows,cols)
-#hanger.h_close()
 hanger.close()
