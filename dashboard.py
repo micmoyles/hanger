@@ -5,6 +5,7 @@ import sys
 import hanger
 
 hanger.start('DashBoard' )
+# Print container to hold doughnut chart
 print '''
 <br>
 <div class='row container'>
