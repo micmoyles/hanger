@@ -23,7 +23,7 @@ $(document).ready( function () {
         var dps = [];
 
 var chart = new CanvasJS.Chart("plantProduction",{
-        title :
+        title :{
                 text: "Upcoming Production Profile"
         },
         axisX: {
@@ -59,7 +59,7 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use %s" % session )
 hanger.start('REMIT Events')
 hanger.h2('Current REMIT Events')
-print('<div id="plantProduction" style="height: 300px; width: 100%;"></div>')
+print('<div class="container" id="plantProduction" style="height: 300px; width: 100%;"></div>')
 viewAll = '''
 <div class=container>
 <a href=outages.py?showForm=True>View all events here<a>
