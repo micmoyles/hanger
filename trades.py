@@ -61,6 +61,7 @@ form = '''
 </form>
 '''
 print form
+# select irl.timestamp as segment, irl.position as irl, uk.position as uk, nl.position as nl from irl irl join nl on nl.timestamp = irl.timestamp join uk on uk.timestamp = irl.timestamp ;
 query = 'select * from trades.trades'
 def extendQuery(query,text):
   if 'where' in query:
