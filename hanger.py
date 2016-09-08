@@ -4,14 +4,15 @@
 
 user = 'reader'
 password = '1canR3ad'
-host = '54.194.208.88'
+#host = '54.194.208.88'
+host = 'localhost'
 
 
 def menu():
 	menu = ''
 	menu += str('<a href=trades.py><button type="button" class="btn btn-default btn-small">  Trades </button> </a> ')
 	menu += str('<a href=trade_report.py><button type="button" class="btn btn-default btn-small">  Trade Reporting </button> </a> ')
-	menu += str('<a href=position.py> <button type="button" class="btn btn-default btn-small">Position </button></a> ')
+	menu += str('<a href=energy_positions.py> <button type="button" class="btn btn-default btn-small">Position </button></a> ')
 	menu += str('<a href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
 	menu += str('<a href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
 	menu += str('<a href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
