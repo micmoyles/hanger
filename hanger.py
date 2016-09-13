@@ -10,18 +10,31 @@ host = 'localhost'
 
 def menu():
 	menu = ''
+	menu += str('<a href=dashboard.py><button type="button" class="btn btn-default btn-small">  Dashboard </button> </a> ')
 	menu += str('<a href=trades.py><button type="button" class="btn btn-default btn-small">  Trades </button> </a> ')
 	menu += str('<a href=trade_report.py><button type="button" class="btn btn-default btn-small">  Trade Reporting </button> </a> ')
 	menu += str('<a href=energy_positions.py> <button type="button" class="btn btn-default btn-small">Position </button></a> ')
-	menu += str('<a href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
-	menu += str('<a href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
 	menu += str('<a href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
 	menu += str('<a href=plants.py>  <button type="button" class="btn btn-default btn-small"> Plant Config </button></a> ')
+	menu += str('<a class="remit-menu" > <button type="button" class="btn btn-default btn-small"> REMIT </button></a> ')
 	menu += str('<a class="extend-menu" > <button type="button" class="btn btn-default btn-small"> Extra </button></a> ')
 	print "<div class='col-md-2'>"
 	print "</div>"
 	print "<div class='col-md-8'>"
 	print menu
+	print "</div>"
+
+	print "<div class='row container' style='font-size:18px' >"
+	print "<div class='col-md-2'>"
+	print "</div>"
+	print "<div class='col-md-8 menu-remit'>"
+	print str('<a href=frequency.py> <button type="button" class="btn btn-default btn-small">  System Frequency </button></a> ')
+ 	print str('<a href=soso_prints.py> <button type="button" class="btn btn-default btn-small">  SO-SO Prints </button></a> ')
+	print str('<a href=outages.py>  <button type="button" class="btn btn-default btn-small"> Outages </button></a> ')
+	print str('<a href=canvas.py> <button type="button" class="btn btn-default btn-small">Live Charts </button></a> ')
+	print str('<a href=plants.py>  <button type="button" class="btn btn-default btn-small"> Plant Config </button></a> ')
+	print str('<a href=REMIT > <button type="button" class="btn btn-default btn-small"> Messages</button> </a> ')
+	print "</div>"
 	print "</div>"
 
 	print "<div class='row container' style='font-size:18px' >"

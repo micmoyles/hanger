@@ -41,7 +41,6 @@ form = '''
 
 <button type="submit" class="btn btn-default">Submit</button>
 <button type="button" class="btn btn-info btn-sql">Show Query</button>
-<button type="button" class="btn btn-updateBook">Update Book</button>
 </div>
 </form>
 

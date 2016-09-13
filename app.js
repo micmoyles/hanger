@@ -11,5 +11,9 @@ var main = function() {
 	$('.extend-menu').click(function() {
 	$('.menu-extension').toggle();	
 });
+	$('.menu-remit').hide();	
+	$('.remit-menu').click(function() {
+	$('.menu-remit').toggle();	
+});
 }
 $(document).ready(main);

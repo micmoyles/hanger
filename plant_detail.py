@@ -49,28 +49,46 @@ cursor = db.cursor(mdb.cursors.DictCursor)
 hanger.start('Plant %s' % AssetID)
 hanger.h2('Plant Details - %s' % AssetID)
 hanger.h3('<a href=plant_detail.py?AssetID=TOTAL> Show Total Capacity </a>')
-query = '''
-	select p.Name as Name, 
-	p.AssetID as AssetID,
-	p.FuelType as FuelType,
-	p.NormalCapacity as NormCap, 
-	ps.Status as Status,
-	ps.CurrentCapacity as AvailCap
-	from config.plants p
-	inner join config.plant_status ps on ps.AssetID = p.AssetID
-'''
+#query = '''
+#	select p.Name as Name, 
+#	p.AssetID as AssetID,
+#	p.FuelType as FuelType,
+#	p.NormalCapacity as NormCap, 
+#	ps.Status as Status,
+#	ps.CurrentCapacity as AvailCap
+#	from config.plants p
+#	inner join config.plant_status ps on ps.AssetID = p.AssetID
+#'''
 
+query = '''
+        select messageCreationTs as ts,EventStart,EventEnd,AssetID,EventType,NormalCapacity,AvailableCapacity from REMIT.outages 
+        where AssetID = '%s'
+''' % AssetID 
 cursor.execute(query)
 cols = ['Name', 'AssetID', 'FuelType', 'Status', 'NormalCapacity','CurrentCapacity']
+cols = ['messageTs','EventStart','EventEnd','AssetID','EventType','NormCap','AvailCap']
+
 rows = cursor.fetchall()
+#d = []
+#for row in rows:
+#  d.append((str(row['Name']), 
+#           str(row['AssetID']),
+#           str(row['FuelType']),
+#           str(row['Status']),
+#           row['NormCap'],
+#           row['AvailCap'],
+#))
+#rows = d
 d = []
 for row in rows:
-  d.append((str(row['Name']), 
-           str(row['AssetID']),
-           str(row['FuelType']),
-           str(row['Status']),
-           row['NormCap'],
-           row['AvailCap'],
+  d.append((
+           str(row['ts']),
+           str(row['EventStart']),
+           str(row['EventEnd']),
+           "<a href=plant_detail.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
+           str(row['EventType']),
+           row['NormalCapacity'],
+           row['AvailableCapacity'],
 ))
 rows = d
 
