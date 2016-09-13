@@ -13,7 +13,7 @@ print '''
 <div id="doughnutChartContainer" style="height: 300px; width: 100%;"></div>
 </div>
 <div class='col-md-6'>
-<div id="productionChartContainer" style="height: 300px; width: 100%;"></div>
+<div id="lineChartContainer" style="height: 300px; width: 100%;"></div>
 </div>
 <div class='col-md-6'>
 </div>

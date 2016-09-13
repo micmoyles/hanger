@@ -94,7 +94,11 @@ form = '''
         </td>
         <td>
         <label for="exampleInputName2">Fuel Type</label>
-        <input type="text" name="FuelType" class="form-control" id="exampleInputName2">
+        <select class='form-control'>
+          <option>COAL</option>
+          <option>NUCLEAR</option>
+          <option>CCGT</option>
+          <option>OTHER</option>
         </td>
         <td>
         <label for="exampleInputName2">Range (Days)</label>
@@ -111,7 +115,7 @@ form = '''
 if showForm: print form
 now = datetime.datetime.now().strftime( '%Y-%m-%d %H:%m:%S')
 log.info(rangeInDays)
-if not rangeInDays: 
+if not rangeInDays:
    rangeInDays=2
 else:
    rangeInDays = int(rangeInDays)
@@ -145,9 +149,7 @@ hanger.showquery(query)
 if any((EventStatus,AffectedUnit,EventType,AssetID,rangeInDays)): showForm = True
 
 cursor.execute(query)
-cols = map(lambda x: x[0], cursor.description) 
-#cols = ['AffectedUnitEIC','AssetType','AffectedUnit','DurationUncertainty','RelatedInformation','AssetId','EventType','NormalCapacity','AvailableCapacity','EventStatus','EventStart','EventEnd','Cause','FuelType','Participant_MarketParticipantID','MassageHeading']
-#cols = ['AffectedUnit','AssetId','EventType','NormCap','AvailCap','EventStatus','EventStart','EventEnd','FuelType','MessageHeading']
+cols = map(lambda x: x[0], cursor.description)
 cols = ['messageTs','EventStart','EventEnd','AssetID','EventType','NormCap','AvailCap']
 rows = cursor.fetchall()
 cursor.close()
@@ -159,6 +161,7 @@ for row in rows:
            str(row['EventEnd']),
            "<a href=plant_detail.py?AssetID=%s> %s </a>" % ( str(row['AssetID']), str(row['AssetID']) ) ,
            str(row['EventType']),
+           row['FuelType'],
            row['NormalCapacity'],
            row['AvailableCapacity'],
 ))
