@@ -18,17 +18,17 @@ window.onload = function () {
    });
    doughnutChart.render();
 
-    var dps = [{x: 1, y: 11}, {x: 2, y: 11}, {x: 3, y: 11}, {x: 4, y: 11}, {x: 5, y: 11}];   //dataPoints. 
+    var dps = [{x: 1, y: 11}, {x: 2, y: 12}, {x: 3, y: 11}, {x: 4, y: 10}, {x: 5, y: 11}, {x:6,y:12},{x:7,y:12.5}];   //dataPoints. 
  
     var chart = new CanvasJS.Chart("lineChartContainer",{
 	title :{
 		text: "System Frequency"
 	},
 	axisX: {						
-		title: "Hertz"
+		title: "Time"
 	},
 	axisY: {						
-		title: "min"
+		title: "Hertz"
 	},
 	data: [{
 		type: "line",
@@ -36,4 +36,25 @@ window.onload = function () {
 	 }]
 });
 chart.render();
+var xVal = dps.length + 1;
+var yVal = 10;	
+var updateInterval =  500;
+var updateChart = function () {
+      	
+      	
+      	yVal = yVal +  Math.round(1 + Math.random() *(-1-1));
+      	dps.push({x: xVal,y: yVal});
+      	
+      	xVal++;
+      	if (dps.length > 200 )
+      	{
+      		dps.shift();				
+      	}
+
+      	chart.render();		
+
+	// update chart after specified time. 
+
+};
+setInterval(function(){updateChart()}, updateInterval); 
 }
