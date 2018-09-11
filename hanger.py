@@ -46,6 +46,7 @@ def menu():
 	print str('<a href=loader.py> <button type="button" class="btn btn-default btn-small"> Loader</button> </a> ')
 	print str('<a href=canvas.py> <button type="button" class="btn btn-default btn-small">Live Charts </button></a> ')
 	print str('<a href=configs.py> <button type="button" class="btn btn-default btn-small"> Configs </button></a> ')
+	print str('<a href=blog.html> <button type="button" class="btn btn-default btn-small"> Blog/Docs </button></a> ')
 	print str('<a href=REMIT > <button type="button" class="btn btn-default btn-small"> Messages</button> </a> ')
 	print "</div>"
 	print "</div>"
