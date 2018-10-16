@@ -6,8 +6,31 @@
 </head>
 <body>
 <h1>Installing Puppet</h1>
+<h2>Enable the repo</h2>
+<p>Use a command like the one below, this was used for a Debian OS, the release version will be different for older Debian and for all Ubuntu etc <br>
+<blockquote>
+<code>
+	wget https://apt.puppetlabs.com/puppetlabs-release-jessie.deb<br>
+	dpkg -i puppetlabs-release-jessie.deb<br>
+	apt-get update
+</code>
+</blockquote>
+</p>
+<h3>Agent</h3>
+<p>
+	<code>apt-get install puppet</code> -- 
+	Ensure that there is an entry in /etc/hosts pointing to the puppet master with hostname 'puppet'. The next step is to start the agent and sign the cert on the master<br>
+	<strong>Master pending certs before new agent makes request</strong><br>
+	<blockquote>
+	<code>
+		mmoyles@puppet ~ $ sudo puppet cert list 
+  "knopfler"      (SHA256) CD:19:94:D1:C1:E1:01:7C:FD:3B:E6:25:56:7B:C0:A1:A3:EC:64:09:5E:81:79:BE:21:0E:C9:D3:E5:B1:4B:25 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:puppet", "DNS:puppet.chello.ie")
+  "knopfler.home" (SHA256) 36:7D:8D:33:44:87:5D:C3:B7:33:97:8F:47:16:82:47:86:B7:69:85:AD:DC:61:34:8F:25:B0:2E:72:3A:15:78 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:knopfler.home", "DNS:puppet", "DNS:puppet.chello.ie")
+	</code>
+	</blockquote>
+</p>
 <h1>Installing Docker</h1>
-<h2>Puppet</h2>
+<h2>On RPi</h2>
 <p>Need to update Raspbian Release to from Wheezy to Jessie - see further section - this is because the wheezy release
 is not supported by the docker repositories or installation processes.</p>
 <p>By reading the get-docker.sh script provided by docker it become clear that the required steps are
@@ -16,7 +39,20 @@ is not supported by the docker repositories or installation processes.</p>
     <li>3. Update our apt repo and install docker from the repo</li>
 </p>
 <h2>Laptop</h2>
+<p>TODO</p>
 <h1>Update Wheezy to Jessie</h1>
-<p>Include note on clearing unused packages to save space.</p>
+<p>Include note on clearing unused packages to save space and notes on what went wrong when I tried this</p>
+<h1>Pinning versions</h1>
+<p>If we want to prevent ourselves updating versions of key packages we need to add a file like this<br>
+	<blockquote>
+	<code>
+root@ubuntu-puppet:~# vim /etc/apt/preferences.d/00-puppet.pref
+# /etc/apt/preferences.d/00-puppet.pref
+Package: puppet puppet-common puppetmaster-passenger
+Pin: version 3.8*
+Pin-Priority: 501
+	</code>
+	</blockquote>
+</p>
 </body>
 </html>
