@@ -55,9 +55,35 @@ is not supported by the docker repositories or installation processes.</p>
 <h2>Installing on Laptop</h2>
 <p>This was all added to the docker puppet module</p>
 <h2>Basic Docker Commands</h2>
-    <li>1.<code>docker build -t hellogo .</code> - The final arg can be a path to a Dockerfile </li>
-    <li>2. <code> docker run hellogo </code> - Run what you just built</li>
-    <li>3. </li>
+    <li><code>docker build -t hellogo .</code> - The final arg can be a path to a Dockerfile </li>
+    <li><code> docker run hellogo </code> - Run what you just built</li>
+    <li><code>docker run --log-driver syslog   subscriber</code> - to use syslog facility</li>
+    <li><code> docker run -v $PWD/data/REMIT/transmit:/data/REMIT/transmit  subscriber</code> - to mount a local path to container path</li>
+<h2>Docker Issues</h2>
+<h3>Permissions</h3>
+<blockquote>
+	<CODE>
+		michael@mmoyles-workstation-1:~/workspace/puppet/modules/docker/files/docker/hellogo$ docker build -t hellogo . <br>
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.38/build?buildargs=%7B%7D&cachefrom=%5B%5D&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=Dockerfile&labels=%7B%7D&memory=0&memswap=0&networkmode=default&rm=1&session=m3z4dta63e22797fi5209x15f&shmsize=0&t=hellogo&target=&ulimits=null&version=1: dial unix /var/run/docker.sock: connect: permission denied <br>
+	</CODE>
+</blockquote>	
+	A bypass of this is to run the command as root but the source of the problem was that the current user was not part of the <i>docker</i> group. 
+<blockquote>
+	<code>
+		michael@mmoyles-workstation-1:~/workspace/puppet/modules/docker/files$ groups michael <br> 
+michael : michael adm cdrom sudo dip plugdev lpadmin sambashare libvirtd <br>
+	</code>
+</blockquote>
+	We can update a users groups using a command like below 
+<blockquote>
+	<code>
+		michael@mmoyles-workstation-1:~/workspace/puppet/modules/docker/files$ sudo usermod -a -G docker michael <br> 
+michael@mmoyles-workstation-1:~/workspace/puppet/modules/docker/files$ groups michael 
+michael : michael adm cdrom sudo dip plugdev lpadmin sambashare docker libvirtd <br>
+	</code>
+</blockquote>
+It's important to restart your session or logout/in for the change to take effect. 
+
 <h1>Update Wheezy to Jessie</h1>
 <p>Include note on clearing unused packages to save space and notes on what went wrong when I tried this</p>
 <h1>Pinning versions</h1>
