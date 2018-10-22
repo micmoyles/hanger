@@ -19,18 +19,32 @@
 <h3>Agent</h3>
 <p>
 	<code>apt-get install puppet</code> -- 
-	Ensure that there is an entry in /etc/hosts pointing to the puppet master with hostname 'puppet'. The next step is to start the agent and sign the cert on the master<br>
-	<strong>Master pending certs before new agent makes request</strong><br>
+	Ensure that there is an entry in /etc/hosts pointing to the puppet master with hostname 'puppet'. The next step is to start the agent and sign the cert on the master. The easiest way to achieve this is to trigger a run (or dry run using --noop) from the agent<br>
 	<blockquote>
+		<strong>Trigger dry run</strong><br>
 	<code>
-		mmoyles@puppet ~ $ sudo puppet cert list 
-  "knopfler"      (SHA256) CD:19:94:D1:C1:E1:01:7C:FD:3B:E6:25:56:7B:C0:A1:A3:EC:64:09:5E:81:79:BE:21:0E:C9:D3:E5:B1:4B:25 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:puppet", "DNS:puppet.chello.ie")
-  "knopfler.home" (SHA256) 36:7D:8D:33:44:87:5D:C3:B7:33:97:8F:47:16:82:47:86:B7:69:85:AD:DC:61:34:8F:25:B0:2E:72:3A:15:78 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:knopfler.home", "DNS:puppet", "DNS:puppet.chello.ie")
+		michael@mmoyles-workstation-1- ~ $ sudo puppet agent -t --noop <br>
+		Oct 22 09:52:24 mmoyles-workstation-1 puppet-agent[4498]: Creating a new SSL certificate request for mmoyles-workstation-1.home <br>
+Oct 22 09:52:24 mmoyles-workstation-1 puppet-agent[4498]: Certificate Request fingerprint (SHA256): 58:D3:92:79:A0:3D:59:9D:D7:10:2C:B8:6D:27:CE:2C:38:FF:3A:AA:89:1E:BE:95:5A:A0:B5:CB:25:C0:50:00<br>
+	</code><br><br>
+	<strong>Master pending certs before new agent makes request</strong><br>
+	<code>
+		mmoyles@puppet ~ $ sudo puppet cert --list <br> 
+[sudo] password for mmoyles: <br>
+  "knopfler"                   (SHA256) CD:19:94:D1:C1:E1:01:7C:FD:3B:E6:25:56:7B:C0:A1:A3:EC:64:09:5E:81:79:BE:21:0E:C9:D3:E5:B1:4B:25 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:puppet", "DNS:puppet.chello.ie") <br>
+  "knopfler.home"              (SHA256) 36:7D:8D:33:44:87:5D:C3:B7:33:97:8F:47:16:82:47:86:B7:69:85:AD:DC:61:34:8F:25:B0:2E:72:3A:15:78 (alt names: "DNS:knopfler", "DNS:knopfler.chello.ie", "DNS:knopfler.home", "DNS:puppet", "DNS:puppet.chello.ie") <br>
+  "mmoyles-workstation-1.home" (SHA256) 58:D3:92:79:A0:3D:59:9D:D7:10:2C:B8:6D:27:CE:2C:38:FF:3A:AA:89:1E:BE:95:5A:A0:B5:CB:25:C0:50:00 <br>
+	</code><br>
+		<strong>Master signs cert</strong><br>
+	<code>
+mmoyles@puppet ~ $ sudo puppet cert sign mmoyles-workstation-1.home <br>
+Notice: Signed certificate request for mmoyles-workstation-1.home
+Notice: Removing file Puppet::SSL::CertificateRequest mmoyles-workstation-1.home at '/var/lib/puppet/ssl/ca/requests/mmoyles-workstation-1.home.pem'
 	</code>
 	</blockquote>
 </p>
-<h1>Installing Docker</h1>
-<h2>On RPi</h2>
+<h1>Docker</h1>
+<h2>Installing On RPi</h2>
 <p>Need to update Raspbian Release to from Wheezy to Jessie - see further section - this is because the wheezy release
 is not supported by the docker repositories or installation processes.</p>
 <p>By reading the get-docker.sh script provided by docker it become clear that the required steps are
@@ -38,8 +52,12 @@ is not supported by the docker repositories or installation processes.</p>
     <li>2. Add the correct docker repo to our apt sources</li>
     <li>3. Update our apt repo and install docker from the repo</li>
 </p>
-<h2>Laptop</h2>
-<p>TODO</p>
+<h2>Installing on Laptop</h2>
+<p>This was all added to the docker puppet module</p>
+<h2>Basic Docker Commands</h2>
+    <li>1.<code>docker build -t hellogo .</code> - The final arg can be a path to a Dockerfile </li>
+    <li>2. <code> docker run hellogo </code> - Run what you just built</li>
+    <li>3. </li>
 <h1>Update Wheezy to Jessie</h1>
 <p>Include note on clearing unused packages to save space and notes on what went wrong when I tried this</p>
 <h1>Pinning versions</h1>
