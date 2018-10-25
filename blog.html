@@ -109,14 +109,35 @@ It's important to restart your session or logout/in for the change to take effec
 <h3>Subnets</h3>
 	<p>
 		<a href='https://www.aelius.com/njh/subnet_sheet.html'> Cheat sheet here </a><br>
+		'/n' address gives 2^(32-n) addresses including the two below <br>
 		Each subnet has two reserved hosts<br>
-		<b>subnet address</b> and the <br>
-		<b>broadcast address</b> - the address with which all hosts attached to the subnet can recieve datagrams<br>
-		
+		<b>subnet address</b> which is the first address in the group and the <br>
+		<b>broadcast address</b> which is the last address in the group - the address with which all hosts attached to the subnet can recieve datagrams<br>
+
+		Class A - First octet 1 -126<br>
+		Class B - First octet 128 - 191<br>
+		Class C - First octet 192 - 223<br>
+		First Octet 224 - 239 = multicast<br>
+		IGMP (Internet Group Management Protocol) - a communications protocol used by hosts and adjacent routers on IPv4 networks to establish multicast group memberships<br>
+		IGMP Join - protocol message sent to join a multicast group<br>
 	</p>
+<h3>Debugging Tools (Network)</h3>
+	<li>iperf</li>
+	<li>ethtool</li>
+	<li>dig</li>
+	<li>nc/netcat</li>
+	<li>netstat</li>
+	<li>ifconfig</li>
+	<li>traceroute</li>
+	<li>tcpdump</li>
+	<li>telnet</li>
+<h3>Debugging Tools (System)</h3>
 <h3>MTU discovery</h3>
+
 <h3>Jenkins</h3>
 <h3>Googles Map Reduce</h3>
+
+
 <h2>Tools to learn</h2>
 <li>Terraform</li>
 <li>Docker</li>
