@@ -10,3 +10,8 @@ services:
     build: ./api
     ports:
       - 5002:5000
+
+    api-3-service:
+    build: ./api
+    ports:
+      - 5003:5000
