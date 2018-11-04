@@ -11,7 +11,9 @@ data = {}
 getQuery = '''
 	select name, dob from users where name = "%s"
 ''' 
-db = mdb.connect( 'localhost', "reader", "1canR3ad" )
+# when running from a container we cannot use localhost or 127.0.0.1
+# as they reference virtual networks within the container
+db = mdb.connect( "192.168.0.199", "reader", "1canR3ad" )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use projectR" )
 
@@ -26,10 +28,10 @@ class User(Resource):
 		query = getQuery % name
 		cursor.execute( query )
 		response = cursor.fetchone()
-		print response
+		print(response)
 		
 		if response['name'].lower() != name.lower():
-			print 'Some kind of serious error'
+			print('Some kind of serious error')
 			return 400
 		return "Hello %s!, your birthday is in %d days" % (name,getDaystoBirthday(response['dob']))
 
@@ -50,5 +52,5 @@ class User(Resource):
 api.add_resource(User, '/hello/<name>','/hello')
 
 if __name__ == '__main__':
-	#app.run(host='0.0.0.0', port=5000, debug=True)
-	app.run(debug=True)
+	# when running in a container we must listen on 0.0.0.0 not localhost	
+	app.run(host = '0.0.0.0' , port=5000, debug=True)
