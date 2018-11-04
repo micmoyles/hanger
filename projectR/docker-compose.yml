@@ -1,17 +1,21 @@
 version: '3'
 
 services:
+  database-container:
+    build: ./database
+    volumes:
+      - "./database/data:/var/lib/mysql:rw"
+#    env_file:
+#      - db-vars.environment 
+    ports:
+      - 3307:3306
+
   api-1-service:
     build: ./api
     ports:
       - 5001:5000
+    depends_on:
+      - database-container
 
-  api-2-service:
-    build: ./api
-    ports:
-      - 5002:5000
 
-    api-3-service:
-    build: ./api
-    ports:
-      - 5003:5000
+

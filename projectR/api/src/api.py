@@ -11,9 +11,11 @@ data = {}
 getQuery = '''
 	select name, dob from users where name = "%s"
 ''' 
+
+responseString = "Hello %s!, your birthday is in %d days"
 # when running from a container we cannot use localhost or 127.0.0.1
 # as they reference virtual networks within the container
-db = mdb.connect( "192.168.0.199", "reader", "1canR3ad" )
+db = mdb.connect( "database-container", "root", "chelsea" )
 cursor = db.cursor(mdb.cursors.DictCursor)
 cursor.execute( "use projectR" )
 
@@ -24,13 +26,18 @@ class User(Resource):
 
 	
 	def get(self, name):
+		
+		if name in data.keys():
+			return responseString % (name,getDaystoBirthday(data[name]))
 
 		query = getQuery % name
 		cursor.execute( query )
 		response = cursor.fetchone()
-		print(response)
+		if not response:
+			return '{ "message": "user not found"}'
 		
-		if response['name'].lower() != name.lower():
+		
+		if len(response) > 0 and response['name'].lower() != name.lower():
 			print('Some kind of serious error')
 			return 400
 		return "Hello %s!, your birthday is in %d days" % (name,getDaystoBirthday(response['dob']))
