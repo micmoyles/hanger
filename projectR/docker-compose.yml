@@ -35,7 +35,12 @@ services:
   load-balancer:
     build: ./load-balancer
     volumes:
-      - ./load-balancer:/etc/nginx/sites-enabled
+      - ./load-balancer:/etc/nginx/sites-enabled/
     ports:
       - 5000:5000
+      - 8080:8080
+    links:
+      - api-1-service
+      - api-2-service
+      - api-3-service
 
